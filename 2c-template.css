@@ -28,11 +28,11 @@ clear: both;
 }
 
 #c1 {
-    background-color:#aaa;
+    background-color:hsl(226, 90%, 67%);
 }
 
 #c2 {
-    background-color:#bbb;
+    background-color:hsl(226, 90%, 67%);
 }
 
 /* estilos para imágenes https://www.w3schools.com/css/css3_images.asp */
@@ -61,5 +61,8 @@ img {
         width: 100%;
     }
 }
+
+
+
 
 /* Más sobre diseño web responsive https://www.w3schools.com/css/css_rwd_intro.asp */
