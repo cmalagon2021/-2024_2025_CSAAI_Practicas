@@ -1,114 +1,202 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prácticas CSAAI 2025</title>
 
-   <!-- Hoja de estilo -->
-   <link rel="stylesheet" href="2c-template.css">    
-   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <!-- Hoja de estilos externa -->
+    <link rel="stylesheet" href="2c-template.css">    
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Estilos internos -->
+    <style>
+        /* Estilos para el menú de navegación */
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #111480;
+            padding: 15px;
+            border-radius: 8px;
+            width: 200px;
+        }
+
+        nav li {
+            margin: 10px 0;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: block;
+            text-align: center;
+            width: 100%;
+        }
+
+        nav a:hover {
+            background-color: #ffcc00;
+            color: black;
+        }
+
+        /* Estilos generales */
+        .fila {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        .columna {
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .izquierda {
+            width: 30%;
+            background-color: #f4f4f4;
+        }
+
+        .derecha {
+            width: 65%;
+            background-color: #f9f9f9;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .iresponsive {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .iresponsive img {
+            width: 150px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        /* Estilos para las prácticas */
+        .practica {
+            background: white;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .practica h3 {
+            font-size: 20px;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        .practica a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .practica a:hover {
+            color: #ff9900;
+        }
+
+        .practica img {
+            width: 100px;
+            height: auto;
+            margin: 10px 0;
+            border-radius: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .practica img:hover {
+            transform: scale(1.1);
+        }
+
+        .practica p {
+            font-size: 16px;
+            color: #555;
+        }
+    </style>
 
 </head>
 <body>
-    
+
     <h1>Mi Repo de Prácticas CSAAI 2025</h1>
 
     <div class="fila">
-      <div id="c1" class="columna izquierda">
-        <h2>Índice de Prácticas</h2>
-        <h2>Profe: Jesús Parrado Alameda</h2>
 
-        <div class="iresponsive">
-            <img id="imghtml" src="html5.png" alt="html5" width="200" height="200">
+        <!-- Sección izquierda -->
+        <div id="c1" class="columna izquierda">
+            <h2>Índice de Prácticas</h2>
+            <h2>Profe: Jesús Parrado Alameda</h2>
+
+            <div class="iresponsive">
+                <img id="imghtml" src="html5.png" alt="html5">
+            </div>
+
+            <div class="iresponsive">
+                <img id="imgcss" src="css.png" alt="css">
+            </div>
+
+            <p>Este es mi repositorio de prácticas en la asignatura CSAAI.</p>
+
+            <!-- Menú de navegación -->
+            <nav>
+                <ul>
+                    <li><a href="https://cmalagon2021.github.io/-2024_2025_CSAAI_Practicas/P1/MiCurriculum/curriculum">Práctica 1: CV</a></li>
+                    <li><a href="#">Formación</a></li>
+                    <li><a href="#">Experiencia</a></li>
+                    <li><a href="#">Acerca de</a></li>
+                </ul>
+            </nav>
         </div>
 
-        <div class="iresponsive">
-            <img id="imgcss" src="css.png" alt="css" width="200" height="200">
+        <!-- Sección derecha -->
+        <div id="c2" class="columna derecha">
+            <h2>Índice de Prácticas</h2>
+
+            <div class="practica">
+                <h3><a href="https://cmalagon2021.github.io/-2024_2025_CSAAI_Practicas/P1/MiCurriculum/curriculum">Práctica 1: CV</a></h3>
+                <img src="web-tech.png" alt="Tecnologías web">
+                <p>Descripción de la práctica 1.</p>
+            </div>
+
+            <div class="practica">
+                <h3>Práctica 2: ?</h3>
+                <img src="web-tech.png" alt="Tecnologías web">
+                <p>Descripción de la práctica 2.</p>
+            </div>
+
+            <div class="practica">
+                <h3>Práctica 3: ?</h3>
+                <img src="web-tech.png" alt="Tecnologías web">
+                <p>Descripción de la práctica 3.</p>
+            </div>
+
+            <div class="practica">
+                <h3>Práctica 4: ?</h3>
+                <img src="web-tech.png" alt="Tecnologías web">
+                <p>Descripción de la práctica 4.</p>
+            </div>
+
+            <div class="practica">
+                <h3>Práctica 5: ?</h3>
+                <img src="web-tech.png" alt="Tecnologías web">
+                <p>Descripción de la práctica 5.</p>
+            </div>
         </div>
 
-        <p>Este es mi respositorio de prácticas en la asignatura CSAAI
-        </p>
-        <style>
-            nav ul {
-                list-style: none;
-                padding: 0;
-                margin: 0;
-                display: flex;
-                flex-direction: column; /* Cambia la disposición a vertical */
-                align-items: center; /* Centra los elementos */
-                background-color: #111480;
-                padding: 15px;
-                border-radius: 8px;
-                width: 200px; /* Ajusta el ancho del menú */
-            }
-        
-            nav li {
-                margin: 10px 0; /* Espaciado vertical entre elementos */
-            }
-        
-            nav a {
-                text-decoration: none;
-                color: white;
-                font-weight: bold;
-                font-size: 18px;
-                transition: all 0.3s ease;
-                padding: 10px 20px;
-                border-radius: 5px;
-                display: block; /* Hace que ocupe toda la línea */
-                text-align: center;
-                width: 100%; /* Para que se vea uniforme */
-            }
-        
-            nav a:hover {
-                background-color: #ffcc00;
-                color: black;
-            }
-        </style>
-        
-        <nav>
-            <ul>
-                <li><a href="https://cmalagon2021.github.io/-2024_2025_CSAAI_Practicas/P1/MiCurriculum/curriculum">Práctica 1: CV</a></li>
-                <li><a href="#">Formación</a></li>
-                <li><a href="#">Experiencia</a></li>
-                <li><a href="#">Acerca de</a></li>
-            </ul>
-        </nav>
-        
-      </div>
-      <div id="c2" class="columna derecha">
-        <h2 id="practica_1">Práctica 1: CV</h2>
-        <img src="web-tech.png" alt="Tecnologías web">
-        <p>Senserit mediocrem vis ex, et dicunt deleniti gubergren mei. Mel id clita mollis repudiare. 
-            Sed ad nostro delicatissimi, postea pertinax est an. Adhuc sensibus percipitur sed te, 
-            eirmod tritani debitis nec ea. Cu vis quis gubergren.
-        </p>
-        <h2>Práctica 2: ?</h2>
-        <img src="web-tech.png" alt="Tecnologías web">
-        <p>Senserit mediocrem vis ex, et dicunt deleniti gubergren mei. Mel id clita mollis repudiare. 
-            Sed ad nostro delicatissimi, postea pertinax est an. Adhuc sensibus percipitur sed te, 
-            eirmod tritani debitis nec ea. Cu vis quis gubergren.
-        </p>        
-        <h2>Práctica 3: ?</h2>
-        <img src="web-tech.png" alt="Tecnologías web">
-        <p>Senserit mediocrem vis ex, et dicunt deleniti gubergren mei. Mel id clita mollis repudiare. 
-            Sed ad nostro delicatissimi, postea pertinax est an. Adhuc sensibus percipitur sed te, 
-            eirmod tritani debitis nec ea. Cu vis quis gubergren.
-        </p>        
-        <h2>Práctica 4: ?</h2>
-        <img src="web-tech.png" alt="Tecnologías web">
-        <p>Senserit mediocrem vis ex, et dicunt deleniti gubergren mei. Mel id clita mollis repudiare. 
-            Sed ad nostro delicatissimi, postea pertinax est an. Adhuc sensibus percipitur sed te, 
-            eirmod tritani debitis nec ea. Cu vis quis gubergren.
-        </p>        
-        <h2>Práctica 5: ?</h2>
-        <img src="web-tech.png" alt="Tecnologías web">
-        <p>Senserit mediocrem vis ex, et dicunt deleniti gubergren mei. Mel id clita mollis repudiare. 
-            Sed ad nostro delicatissimi, postea pertinax est an. Adhuc sensibus percipitur sed te, 
-            eirmod tritani debitis nec ea. Cu vis quis gubergren.
-        </p>                                
-      </div>
     </div>
 
 </body>
