@@ -28,11 +28,19 @@ clear: both;
 }
 
 #c1 {
-    background-color:#689436;
-}
+   
+      background: rgba(255, 255, 255, 0.2); /* Blanco con 20% de opacidad */
+      padding: 20px;
+      border-radius: 10px;
+      backdrop-filter: blur(5px); /* Difuminado suave */
+  }
+  
 
 #c2 {
-    background-color:#f1d118;
+  background: rgba(255, 255, 255, 0.2); /* Blanco con 20% de opacidad */
+  padding: 20px;
+  border-radius: 10px;
+  backdrop-filter: blur(5px); /* Difuminado suave */
 }
 
 /* estilos para imágenes https://www.w3schools.com/css/css3_images.asp */
@@ -63,14 +71,14 @@ img {
 }
 
 
-/* Estilo del menú */
+/* MENÚ 1 ------------------------------------------------------------------------------------ */
 .menu {
   list-style: none;
   padding: 0;
   margin: 20px auto;
   display: flex;
   justify-content: center;
-  background: #ff9800; /* Color naranja aventurero */
+  background: linear-gradient(135deg, #ff9800, #ff5722); /* Color naranja aventurero */
   border-radius: 10px;
   overflow: hidden;
   width: fit-content;
@@ -108,4 +116,128 @@ img {
   }
 }
 
-/* Más sobre diseño web responsive https://www.w3schools.com/css/css_rwd_intro.asp */
+
+/* MENÚ 2 ----------------------------------------------------------------------- */
+
+/* Estilo del menú mejorado */
+.menu2 {
+  list-style: none;
+  padding: 0;
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(90deg, #383838, #424242, #1e024b);
+  border-radius: 15px;
+  overflow: hidden;
+  width: fit-content;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra elegante */
+  padding: 10px;
+}
+
+/* Estilo de los elementos de la lista */
+.menu2 li {
+  padding: 15px 20px;
+  position: relative;
+}
+
+/* Estilo de los enlaces */
+.menu2 li a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: all 0.5s ease-in-out;
+  position: relative;
+  display: inline-block;
+}
+
+/* Efecto hover con subrayado animado */
+.menu2 li a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 3px;
+  background: rgb(255, 255, 255);
+  left: 50%;
+  bottom: -5px;
+  transition: all 0.3s ease-in-out;
+  transform: translateX(-50%);
+}
+
+/* Animación en hover */
+.menu2 li a:hover {
+  color: #ffcc00; /* Amarillo vibrante */
+}
+
+.menu2 li a:hover::after {
+  width: 100%;
+}
+
+/* Diseño Responsive */
+@media (max-width: 800px) {
+  .menu2 {
+      flex-direction: column; /* Apila los elementos verticalmente */
+      text-align: center;
+      width: 100%;
+      padding: 0;
+  }
+  
+  .menu2 li {
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      width: 100%;
+  }
+
+  .menu2 li:last-child {
+      border-bottom: none; /* Quita la línea del último elemento */
+  }
+}
+
+
+/* BOTÓN----------------------------------------------------------------------- */
+
+/* Contenedor del botón centrado */
+.boton-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Estilo del botón */
+.boton {
+  display: inline-block;
+  background: linear-gradient(135deg, #ff9800, #ff5722); /* Degradado naranja */
+  color: white;
+  padding: 12px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Efecto hover */
+.boton:hover {
+  background: linear-gradient(135deg, #ff5722, #ff9800);
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+
+/* FONDO----------------------------------------------------------------------- */
+
+/* Fondo general con un degradado verde selva */
+body {
+  background: linear-gradient(130deg, #260DD9, #650dd9, #1e024b); 
+  background-size: cover;
+  color: white; /* Texto en blanco para buen contraste */
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Centrar el contenido */
+nav {
+  text-align: center;
+  margin-top: 30px;
+}
