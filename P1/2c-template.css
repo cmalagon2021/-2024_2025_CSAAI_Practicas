@@ -28,11 +28,11 @@ clear: both;
 }
 
 #c1 {
-    background-color:#aaa;
+    background-color:#689436;
 }
 
 #c2 {
-    background-color:#bbb;
+    background-color:#f1d118;
 }
 
 /* estilos para imágenes https://www.w3schools.com/css/css3_images.asp */
@@ -60,6 +60,52 @@ img {
     .iresponsive {
         width: 100%;
     }
+}
+
+
+/* Estilo del menú */
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+  background: #ff9800; /* Color naranja aventurero */
+  border-radius: 10px;
+  overflow: hidden;
+  width: fit-content;
+}
+
+/* Estilo de los elementos de la lista */
+.menu li {
+  padding: 15px 20px;
+}
+
+/* Estilo de los enlaces */
+.menu li a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+/* Efecto hover */
+.menu li a:hover {
+  color: #4b2c20; /* Marrón oscuro para resaltar */
+}
+
+/* Diseño Responsive */
+@media (max-width: 1750px) {
+  .menu {
+      flex-direction: column; /* Apila los elementos verticalmente */
+      text-align: center;
+  }
+  
+  .menu li {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  }
 }
 
 /* Más sobre diseño web responsive https://www.w3schools.com/css/css_rwd_intro.asp */
