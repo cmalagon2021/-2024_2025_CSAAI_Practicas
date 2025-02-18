@@ -230,8 +230,11 @@ img {
 
 /* Fondo general con un degradado verde selva */
 body {
-  background: linear-gradient(130deg, #260DD9, #650dd9, #1e024b); 
-  background-size: cover;
+  background: url('recursos/hojas.jpg'), linear-gradient(130deg, #016e06, #056d0a, #134b02);
+  background-blend-mode: overlay; /* Combina la imagen con el degradado */
+  background-size: cover; /* Hace que la imagen cubra toda la pantalla */
+  background-position: center; /* Centra la imagen */
+  background-attachment: fixed; /* Fija el fondo para un efecto elegante */
   color: white; /* Texto en blanco para buen contraste */
   font-family: 'Arial', sans-serif;
   margin: 0;
@@ -312,7 +315,7 @@ nav {
   text-align: center;
   font-weight: bold;
   color: #ffcc00; /* Amarillo aventurero */
-  text-shadow: 4px 4px 0px #240372, 8px 8px 0px rgba(0, 0, 0, 0.2); /* Efecto 3D */
+  text-shadow: 8px 8px 0px rgba(0, 0, 0, 0.2); /* Efecto 3D */
   animation: pop 1s ease-in-out;
   margin-top: 20px;
 }
@@ -333,7 +336,7 @@ nav {
 @media (max-width: 768px) {
   .titulo-russell {
       font-size: 2rem;
-      text-shadow: 3px 3px 0px #240372, 6px 6px 0px rgba(0, 0, 0, 0.2);
+      text-shadow: 6px 6px 0px rgba(0, 0, 0, 0.2);
   }
 }
 
@@ -344,7 +347,7 @@ nav {
   text-align: center;
   font-weight: bold;
   color: #ffcc00; /* Amarillo aventurero */
-  text-shadow: 3px 3px 0px #240372,6px 6px 0px rgba(0, 0, 0, 0.2);
+  text-shadow:6px 6px 0px rgba(0, 0, 0, 0.2);
   animation: pop 0.2s ease-in-out;
   margin-top: 20px;
 }
@@ -354,7 +357,7 @@ nav {
 @media (max-width: 768px) {
   .titulo-russell2 {
       font-size: 2rem;
-      text-shadow: 3px 3px 0px #240372, 6px 6px 0px rgba(0, 0, 0, 0.2);
+      text-shadow: 6px 6px 0px rgba(0, 0, 0, 0.2);
   }
 }
 
@@ -366,10 +369,10 @@ nav {
   text-align: center;
   font-weight: 900;
   font-family: 'Poppins', sans-serif; /* Tipografía profesional */
-  color: #240372; /* Azul profundo */
+  color: #ff6600; /* Azul profundo */
   text-transform: uppercase;
   letter-spacing: 2px;
-  text-shadow: 2px 2px 0px #b195f1, 4px 4px 10px rgba(0, 0, 0, 0.3);
+  text-shadow: 2px 2px 0px #f1eb95, 4px 4px 10px rgba(0, 0, 0, 0.3);
   animation: fadeInScale 1s ease-in-out;
   margin-top: 20px;
   position: relative;
