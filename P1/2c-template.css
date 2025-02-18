@@ -81,7 +81,7 @@ img {
   background: linear-gradient(135deg, #ff9800, #ff5722); /* Color naranja aventurero */
   border-radius: 10px;
   overflow: hidden;
-  width: fit-content;
+  width: auto;
 }
 
 /* Estilo de los elementos de la lista */
@@ -100,9 +100,10 @@ img {
 
 /* Efecto hover */
 .menu li a:hover {
-  color: #4b2c20;
+  color: #1d224b;
    /* Marrón oscuro para resaltar */
 }
+
 
 /* Diseño Responsive */
 @media (max-width: 1750px) {
