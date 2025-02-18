@@ -127,7 +127,7 @@ img {
   margin: 20px auto;
   display: flex;
   justify-content: center;
-  background: linear-gradient(90deg, #383838, #424242, #1e024b);
+  background: linear-gradient(90deg, #1c0344, #424242, #1e024b);
   border-radius: 15px;
   overflow: hidden;
   width: fit-content;
@@ -206,7 +206,8 @@ img {
 /* Estilo del botón */
 .boton {
   display: inline-block;
-  background: linear-gradient(135deg, #ff9800, #ff5722); /* Degradado naranja */
+  background: rgba(255, 255, 255, 0.2); /* Blanco con 20% de opacidad */
+  backdrop-filter: blur(5px); /* Difuminado suave */
   color: white;
   padding: 12px 20px;
   font-size: 18px;
@@ -219,7 +220,7 @@ img {
 
 /* Efecto hover */
 .boton:hover {
-  background: linear-gradient(135deg, #ff5722, #ff9800);
+  background: linear-gradient(135deg, #1e024b, #260DD9);
   transform: scale(1.05);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
@@ -243,4 +244,172 @@ nav {
   margin-top: 30px;
 }
 
+
+
+/* BOTÓN2----------------------------------------------------------------------- */
+
+/* Contenedor del botón centrado */
+.boton-container2 {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Estilo del botón con efecto brillante */
+.boton2 {
+  display: inline-block;
+  background: linear-gradient(135deg, #1e024b, #260DD9); 
+  color: white;
+  padding: 14px 24px;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(255, 165, 0, 0.6), 0 0 30px rgba(255, 140, 0, 0.4); /* Efecto neón */
+  transition: all 0.4s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efecto de luz animado */
+.boton2::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.274) 10%, transparent 10%);
+  transition: all 0.6s ease-in-out;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+}
+
+/* Efecto de resplandor al pasar el cursor */
+.boton2:hover::before {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+
+/* Cambia de color al pasar el cursor */
+.boton2:hover {
+  background: linear-gradient(135deg, #ff6600, #ff3300);
+  color: #fff200; /* Amarillo brillante */
+  box-shadow: 0 0 25px rgba(255, 200, 0, 0.9), 0 0 50px rgba(255, 100, 0, 0.6);
+  transform: scale(1.05);
+}
+
+/* Efecto de pulsación suave */
+.boton2:active {
+  transform: scale(0.98);
+  box-shadow: 0 0 10px rgba(255, 140, 0, 0.5);
+}
+
+/* TITULO-------------------------------------------- */
+
+/* Estilo para el título "¡Hola, soy Russell!" */
+.titulo-russell {
+  font-size: 3rem;
+  text-align: center;
+  font-weight: bold;
+  color: #ffcc00; /* Amarillo aventurero */
+  text-shadow: 4px 4px 0px #240372, 8px 8px 0px rgba(0, 0, 0, 0.2); /* Efecto 3D */
+  animation: pop 1s ease-in-out;
+  margin-top: 20px;
+}
+
+/* Efecto de animación */
+@keyframes pop {
+  0% {
+      transform: scale(0.5);
+      opacity: 0;
+  }
+  100% {
+      transform: scale(1);
+      opacity: 1;
+  }
+}
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 768px) {
+  .titulo-russell {
+      font-size: 2rem;
+      text-shadow: 3px 3px 0px #240372, 6px 6px 0px rgba(0, 0, 0, 0.2);
+  }
+}
+
+
+/* TITULOS PEQUEÑOS-------------------------------------------- */
+.titulo-russell2 {
+  font-size: 2rem;
+  text-align: center;
+  font-weight: bold;
+  color: #ffcc00; /* Amarillo aventurero */
+  text-shadow: 3px 3px 0px #240372,6px 6px 0px rgba(0, 0, 0, 0.2);
+  animation: pop 0.2s ease-in-out;
+  margin-top: 20px;
+}
+
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 768px) {
+  .titulo-russell2 {
+      font-size: 2rem;
+      text-shadow: 3px 3px 0px #240372, 6px 6px 0px rgba(0, 0, 0, 0.2);
+  }
+}
+
+
+
+/* Título de Contacto - Profesional y Sofisticado */
+.titulo-russell3 {
+  font-size: 3.5rem;
+  text-align: center;
+  font-weight: 900;
+  font-family: 'Poppins', sans-serif; /* Tipografía profesional */
+  color: #240372; /* Azul profundo */
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 0px #b195f1, 4px 4px 10px rgba(0, 0, 0, 0.3);
+  animation: fadeInScale 1s ease-in-out;
+  margin-top: 20px;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+/* Línea decorativa debajo del título */
+.titulo-russell3::after {
+  content: "";
+  position: absolute;
+  width: 80px;
+  height: 4px;
+  background: #b195f1; /* Color de la sombra */
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+/* Animación de entrada elegante */
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 768px) {
+  .titulo-russell3 {
+      font-size: 2.5rem;
+      text-shadow: 2px 2px 0px #b195f1, 3px 3px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .titulo-russell3::after {
+      width: 60px;
+  }
+}
 
