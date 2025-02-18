@@ -29,7 +29,7 @@ clear: both;
 
 #c1 {
     background-color:hsl(226, 90%, 67%);
-    max-width: 600px; /* Ajusta el ancho */
+    max-width: auto; /* Ajusta el ancho */
     margin: 0 auto; /* Centra la sección */
     padding: 20px;
     border-radius: 10px; /* Bordes redondeados */
@@ -37,7 +37,7 @@ clear: both;
 }
 
 #c2 {
-  max-width: 600px; /* Ajusta el ancho */
+  max-width: auto; /* Ajusta el ancho */
   margin: 0 auto; /* Centra la sección */
   padding: 20px;
   background-color: #f9f9f9; /* Fondo suave */
