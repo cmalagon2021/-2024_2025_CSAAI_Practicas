@@ -13,11 +13,11 @@ min-height: 500px;
 }
 
 .izquierda {
-width: 25%;
+width: 50%;
 }
 
 .derecha {
-width: 75%;
+width: 50%;
 }
 
 /* Clear floats despues de las columnas para eliminar la superposición */
@@ -111,7 +111,7 @@ img {
 /* Responsive layout - cuando el ancho de pantalla es menor a 600px, muestra las columnas apiladas. */
 /* Así conseguimos que el contenido se vea bien en dispositvos móviles */
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1000px) {
     .columna {
       width: 100%;
     }
