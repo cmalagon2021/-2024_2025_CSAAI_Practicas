@@ -43,6 +43,9 @@ clear: both;
   backdrop-filter: blur(5px); /* Difuminado suave */
 }
 
+
+
+
 /* estilos para imágenes https://www.w3schools.com/css/css3_images.asp */
 /* posicionamiento de imágenes https://www.w3schools.com/css/css_positioning.asp */
 
@@ -370,7 +373,7 @@ nav {
   text-align: center;
   font-weight: 900;
   font-family: 'Poppins', sans-serif; /* Tipografía profesional */
-  color: #ff6600; /* Azul profundo */
+  color: #ff6600; 
   text-transform: uppercase;
   letter-spacing: 2px;
   text-shadow: 2px 2px 0px #f1eb95, 4px 4px 10px rgba(0, 0, 0, 0.3);
@@ -384,9 +387,9 @@ nav {
 .titulo-russell3::after {
   content: "";
   position: absolute;
-  width: 80px;
+  width: 120px;
   height: 4px;
-  background: #b195f1; /* Color de la sombra */
+  background:rgba(255, 255, 255, 0.5);  /* Color de la sombra */
   bottom: -5px;
   left: 50%;
   transform: translateX(-50%);
@@ -409,7 +412,7 @@ nav {
 @media (max-width: 768px) {
   .titulo-russell3 {
       font-size: 2.5rem;
-      text-shadow: 2px 2px 0px #b195f1, 3px 3px 8px rgba(0, 0, 0, 0.2);
+      text-shadow: 2px 2px 0px #f1eb95, 3px 3px 8px rgba(0, 0, 0, 0.2);
   }
 
   .titulo-russell3::after {
