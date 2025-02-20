@@ -532,3 +532,187 @@ nav {
   width: 100%;
   height: 100%;
 }
+
+
+/* PARTE SOBRE MI--------------------------------*/
+
+
+/* Contenedor general de habilidades */
+.habilidades-container {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.25); /* Fondo translúcido */
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  margin: 30px auto;
+}
+
+/* Estilo del título */
+.titulo-habilidades {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #ffcc00; /* Amarillo dorado */
+  text-shadow: 2px 2px 0px #ff5722, 4px 4px 10px rgba(0, 0, 0, 0.3);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Estilo de la lista de habilidades */
+.habilidades-lista {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Estilo de cada habilidad */
+.habilidades-lista li {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(130deg, #ff9800, #ff5722);
+  padding: 12px 20px;
+  margin: 10px 0;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+/* Efecto hover */
+.habilidades-lista li:hover {
+  transform: scale(1.05);
+  background: linear-gradient(130deg, #ff5722, #d84315);
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Animación de entrada */
+@keyframes fadeIn {
+  0% {
+      opacity: 0;
+      transform: translateY(-20px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+  .titulo-habilidades {
+      font-size: 2rem;
+  }
+  .habilidades-lista li {
+      font-size: 1.2rem;
+      padding: 10px 15px;
+  }
+}
+
+
+/* Contenedor general de los amigos */
+.amigos-container {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.25); /* Fondo translúcido */
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  max-width: 900px;
+  margin: 30px auto;
+}
+
+/* Título de la sección */
+.titulo-amigos {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #ffcc00; /* Amarillo dorado */
+  text-shadow: 2px 2px 0px #ff5722, 4px 4px 10px rgba(0, 0, 0, 0.3);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Grid para organizar las tarjetas de los amigos */
+.amigos-grid {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Estilo de cada tarjeta */
+.amigo {
+  background: rgba(255, 255, 255, 0.5);
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  max-width: 250px;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Imagen de los amigos */
+.amigo img {
+  width: 100%;
+  max-width: 180px;
+  height: auto;
+  border-radius: 50%;
+  box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.3);
+  margin-bottom: 15px;
+  align-items: center;
+}
+
+/* Nombre del amigo */
+.amigo h3 {
+  font-size: 1rem;
+  font-weight: 900;
+  color: #ffa722; /* Amarillo dorado */
+  text-shadow:4px 4px 10px rgba(0, 0, 0, 0.3);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Descripción */
+.amigo p {
+  font-size: 1rem;
+  color: white;
+  line-height: 1.5;
+}
+
+/* Efecto hover en cada tarjeta */
+.amigo:hover {
+  transform: scale(1.05);
+  background: linear-gradient(90deg, #1c0344, #424242, #1e024b);
+}
+
+/* Animación de entrada */
+@keyframes fadeIn {
+  0% {
+      opacity: 0;
+      transform: translateY(-20px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+  .titulo-amigos {
+      font-size: 2rem;
+  }
+  .amigos-grid {
+      flex-direction: column;
+      align-items: center;
+  }
+  .amigo {
+      max-width: 90%;
+  }
+}
