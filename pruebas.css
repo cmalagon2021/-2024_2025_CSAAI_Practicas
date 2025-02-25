@@ -1,0 +1,718 @@
+/* https://www.w3schools.com/howto/howto_css_two_columns.asp */
+/* https://developer.mozilla.org/es/docs/Web/CSS/box-sizing */
+/* Así definimos el comportamiento de caja para todos los elementos */
+* {
+    box-sizing: border-box;
+  }
+  
+/* Crear columnas de ancho diferente que se colocan una a continuación de la otra */
+.columna {
+float: left;
+padding: 10px;
+min-height: auto;
+}
+
+.izquierda {
+width: 50%;
+}
+
+.derecha {
+width: 50%;
+}
+
+/* Clear floats despues de las columnas para eliminar la superposición */
+.filla:after {
+content: "";
+display: table;
+clear: both;
+}
+
+#c1 {
+   
+      background: rgba(255, 255, 255, 0.2); /* Blanco con 20% de opacidad */
+      padding: 20px;
+      border-radius: 10px;
+      backdrop-filter: blur(5px); /* Difuminado suave */
+  }
+  
+
+#c2 {
+  background: rgba(255, 255, 255, 0.2); /* Blanco con 20% de opacidad */
+  padding: 20px;
+  border-radius: 10px;
+  backdrop-filter: blur(5px); /* Difuminado suave */
+}
+
+
+
+
+/* estilos para imágenes https://www.w3schools.com/css/css3_images.asp */
+/* posicionamiento de imágenes https://www.w3schools.com/css/css_positioning.asp */
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+.iresponsive {
+    padding: 0 6px;
+    float: left;
+    width: 50%;
+  }
+
+/* Responsive layout - cuando el ancho de pantalla es menor a 600px, muestra las columnas apiladas. */
+/* Así conseguimos que el contenido se vea bien en dispositvos móviles */
+
+@media screen and (max-width: 600px) {
+    .columna {
+      width: 100%;
+    }
+
+    .iresponsive {
+        width: 100%;
+    }
+}
+
+
+/* MENÚ 1 ------------------------------------------------------------------------------------ */
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(135deg, #ff9800, #ff5722); /* Color naranja aventurero */
+  border-radius: 10px;
+  overflow: hidden;
+  width: auto;
+}
+
+/* Estilo de los elementos de la lista */
+.menu li {
+  padding: 15px 20px;
+}
+
+/* Estilo de los enlaces */
+.menu li a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  transition: all 0.5s ease;
+}
+
+/* Efecto hover */
+.menu li a:hover {
+  color: #1d224b;
+   /* Marrón oscuro para resaltar */
+}
+
+
+/* Diseño Responsive */
+@media (max-width: 1750px) {
+  .menu {
+      flex-direction: column; /* Apila los elementos verticalmente */
+      text-align: center;
+  }
+  
+  .menu li {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  }
+}
+
+
+/* MENÚ 2 ----------------------------------------------------------------------- */
+
+/* Estilo del menú mejorado */
+.menu2 {
+  list-style: none;
+  padding: 0;
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(90deg, #1c0344, #424242, #1e024b);
+  border-radius: 15px;
+  overflow: hidden;
+  width: fit-content;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra elegante */
+  padding: 10px;
+}
+
+/* Estilo de los elementos de la lista */
+.menu2 li {
+  padding: 15px 20px;
+  position: relative;
+}
+
+/* Estilo de los enlaces */
+.menu2 li a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: all 0.5s ease-in-out;
+  position: relative;
+  display: inline-block;
+}
+
+/* Efecto hover con subrayado animado */
+.menu2 li a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 3px;
+  background: rgb(255, 255, 255);
+  left: 50%;
+  bottom: -5px;
+  transition: all 0.3s ease-in-out;
+  transform: translateX(-50%);
+}
+
+/* Animación en hover */
+.menu2 li a:hover {
+  color: #ffcc00; /* Amarillo vibrante */
+}
+
+.menu2 li a:hover::after {
+  width: 100%;
+}
+
+/* Diseño Responsive */
+@media (max-width: 800px) {
+  .menu2 {
+      flex-direction: column; /* Apila los elementos verticalmente */
+      text-align: center;
+      width: 100%;
+      padding: 0;
+  }
+  
+  .menu2 li {
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      width: 100%;
+  }
+
+  .menu2 li:last-child {
+      border-bottom: none; /* Quita la línea del último elemento */
+  }
+}
+
+
+/* BOTÓN----------------------------------------------------------------------- */
+
+/* Contenedor del botón centrado */
+.boton-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Estilo del botón */
+.boton {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2); /* Blanco con 20% de opacidad */
+  backdrop-filter: blur(5px); /* Difuminado suave */
+  color: white;
+  padding: 12px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Efecto hover */
+.boton:hover {
+  background: linear-gradient(135deg, #1e024b, #260DD9);
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+
+/* FONDO----------------------------------------------------------------------- */
+
+/* Fondo general con un degradado verde selva */
+body {
+  background: url('recursos/hojas.jpg'), linear-gradient(130deg, #3d3d3d, #333333, #2b2b2b);
+  background-blend-mode: overlay; /* Combina la imagen con el degradado */
+  background-size: cover; /* Hace que la imagen cubra toda la pantalla */
+  background-position: center; /* Centra la imagen */
+  background-attachment: fixed; /* Fija el fondo para un efecto elegante */
+  color: white; /* Texto en blanco para buen contraste */
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Centrar el contenido */
+nav {
+  text-align: center;
+  margin-top: 30px;
+}
+
+
+
+/* BOTÓN2----------------------------------------------------------------------- */
+
+/* Contenedor del botón centrado */
+.boton-container2 {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Estilo del botón con efecto brillante */
+.boton2 {
+  display: inline-block;
+  background: linear-gradient(135deg, #1e024b, #260DD9); 
+  color: white;
+  padding: 14px 24px;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(255, 165, 0, 0.6), 0 0 30px rgba(255, 140, 0, 0.4); /* Efecto neón */
+  transition: all 0.4s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efecto de luz animado */
+.boton2::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1000%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.274) 10%, transparent 10%);
+  transition: all 0.6s ease-in-out;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+}
+
+/* Efecto de resplandor al pasar el cursor */
+.boton2:hover::before {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+
+/* Cambia de color al pasar el cursor */
+.boton2:hover {
+  background: linear-gradient(135deg, #ff6600, #ff3300);
+  color: #fff200; /* Amarillo brillante */
+  box-shadow: 0 0 25px rgba(255, 200, 0, 0.9), 0 0 50px rgba(255, 100, 0, 0.6);
+  transform: scale(1.05);
+}
+
+/* Efecto de pulsación suave */
+.boton2:active {
+  transform: scale(0.98);
+  box-shadow: 0 0 10px rgba(255, 140, 0, 0.5);
+}
+
+/* TITULO-------------------------------------------- */
+
+/* Estilo para el título "¡Hola, soy Russell!" */
+.titulo-russell {
+  font-size: 3rem;
+  text-align: center;
+  font-weight: bold;
+  color: #283747; /* Amarillo aventurero */
+  text-shadow: 8px 8px 0px rgba(0, 0, 0, 0.2); /* Efecto 3D */
+  animation: pop 1s ease-in-out;
+  margin-top: 20px;
+}
+
+/* Efecto de animación */
+@keyframes pop {
+  0% {
+      transform: scale(0.5);
+      opacity: 0;
+  }
+  100% {
+      transform: scale(1);
+      opacity: 1;
+  }
+}
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 768px) {
+  .titulo-russell {
+      font-size: 2rem;
+      text-shadow: 6px 6px 0px rgba(0, 0, 0, 0.2);
+  }
+}
+
+
+/* TITULOS PEQUEÑOS-------------------------------------------- */
+.titulo-russell2 {
+  font-size: 2rem;
+  text-align: center;
+  font-weight: bold;
+  color: #ffcc00; /* Amarillo aventurero */
+  text-shadow:6px 6px 0px rgba(0, 0, 0, 0.2);
+  animation: pop 0.2s ease-in-out;
+  margin-top: 20px;
+}
+
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 768px) {
+  .titulo-russell2 {
+      font-size: 2rem;
+      text-shadow: 6px 6px 0px rgba(0, 0, 0, 0.2);
+  }
+}
+
+
+
+/* Título de Contacto - Profesional y Sofisticado */
+.titulo-russell3 {
+  font-size: 3.5rem;
+  text-align: center;
+  font-weight: 900;
+  font-family: 'Poppins', sans-serif; /* Tipografía profesional */
+  color: #b8b8b8; 
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 0px #2e2e2e, 4px 4px 10px rgba(0, 0, 0, 0.3);
+  animation: fadeInScale 1s ease-in-out;
+  margin-top: 20px;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+/* Línea decorativa debajo del título */
+.titulo-russell3::after {
+  content: "";
+  position: absolute;
+  width: 120px;
+  height: 4px;
+  background:rgba(255, 255, 255, 0.5);  /* Color de la sombra */
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+/* Animación de entrada elegante */
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 768px) {
+  .titulo-russell3 {
+      font-size: 2.5rem;
+      text-shadow: 2px 2px 0px #2e2e2e, 3px 3px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .titulo-russell3::after {
+      width: 60px;
+  }
+}
+
+
+/* PARTE DE LAS INSIGNIAS*/
+
+/* Contenedor principal de las insignias */
+.insignias-container {
+  text-align: center;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1); /* Fondo translúcido */
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  margin: 20px auto;
+  max-width: 600px;
+}
+
+/* Título "INSIGNIAS" con estilo más llamativo */
+.titulo-russell4 {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #ffcc00; /* Amarillo dorado */
+  text-shadow: 3px 3px 0px #ff5722, 6px 6px 10px rgba(0, 0, 0, 0.3);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Caja que contiene la imagen */
+.insignias-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  border-radius: 10px;
+  margin: 15px auto;
+  max-width: 80%;
+}
+
+
+
+/* Imagen de insignias con efecto moderno */
+.insignias-box img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Efecto de zoom al pasar el cursor */
+.insignias-box img:hover {
+  transform: scale(1.05);
+}
+
+/* Texto "Como podéis ver..." con estilo más llamativo */
+.titulo-textos {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  display: inline-block;
+  padding: 8px 15px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+/* Animación de aparición */
+@keyframes fadeIn {
+  0% {
+      opacity: 0;
+      transform: scale(0.9);
+  }
+  100% {
+      opacity: 1;
+      transform: scale(1);
+  }
+}
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 850px) {
+  .titulo-russell4 {
+      font-size: 2.5rem;
+  }
+
+  .insignias-container {
+      padding: 15px;
+  }
+
+  .titulo-textos {
+      font-size: 1rem;
+  }
+}
+
+
+
+.video-container {
+  position: relative;
+  width: 100%;
+  max-width: 800px; /* Ajusta el tamaño máximo */
+  margin: 0 auto; /* Centra el video */
+  padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+  height: 0;
+  overflow: hidden;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+
+/* PARTE SOBRE MI--------------------------------*/
+
+
+/* Contenedor general de habilidades */
+.habilidades-container {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.25); /* Fondo translúcido */
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  margin: 30px auto;
+}
+
+/* Estilo del título */
+.titulo-habilidades {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #ffcc00; /* Amarillo dorado */
+  text-shadow: 2px 2px 0px #ff5722, 4px 4px 10px rgba(0, 0, 0, 0.3);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Estilo de la lista de habilidades */
+.habilidades-lista {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Estilo de cada habilidad */
+.habilidades-lista li {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(130deg, #ff9800, #ff5722);
+  padding: 12px 20px;
+  margin: 10px 0;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+/* Efecto hover */
+.habilidades-lista li:hover {
+  transform: scale(1.05);
+  background: linear-gradient(130deg, #ff5722, #d84315);
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Animación de entrada */
+@keyframes fadeIn {
+  0% {
+      opacity: 0;
+      transform: translateY(-20px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+  .titulo-habilidades {
+      font-size: 2rem;
+  }
+  .habilidades-lista li {
+      font-size: 1.2rem;
+      padding: 10px 15px;
+  }
+}
+
+
+/* Contenedor general de los amigos */
+.amigos-container {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.25); /* Fondo translúcido */
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  max-width: 900px;
+  margin: 30px auto;
+}
+
+/* Título de la sección */
+.titulo-amigos {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #283747; /* Amarillo dorado */
+  text-shadow: 2px 2px 0px #aab7b8, 4px 4px 10px rgba(0, 0, 0, 0.3);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Grid para organizar las tarjetas de los amigos */
+.amigos-grid {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Estilo de cada tarjeta */
+.amigo {
+  background: rgba(255, 255, 255, 0.5);
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  max-width: 250px;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Imagen de los amigos */
+.amigo img {
+  width: 100%;
+  max-width: 180px;
+  height: auto;
+  border-radius: 50%;
+  box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.3);
+  margin-bottom: 15px;
+  align-items: center;
+}
+
+/* Nombre del amigo */
+.amigo h3 {
+  font-size: 1rem;
+  font-weight: 900;
+  color: #ffa722; /* Amarillo dorado */
+  text-shadow:4px 4px 10px rgba(0, 0, 0, 0.3);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Descripción */
+.amigo p {
+  font-size: 1rem;
+  color: white;
+  line-height: 1.5;
+}
+
+/* Efecto hover en cada tarjeta */
+.amigo:hover {
+  transform: scale(1.05);
+  background: linear-gradient(90deg, #000066, #0033FF, #1e024b);
+}
+
+/* Animación de entrada */
+@keyframes fadeIn {
+  0% {
+      opacity: 0;
+      transform: translateY(-20px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+  .titulo-amigos {
+      font-size: 2rem;
+  }
+  .amigos-grid {
+      flex-direction: column;
+      align-items: center;
+  }
+  .amigo {
+      max-width: 90%;
+  }
+}
