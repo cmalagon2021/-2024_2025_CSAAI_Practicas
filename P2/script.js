@@ -123,3 +123,5 @@ window.onload = () => {
   generateSecretCode();
   updateAttempts();
 };
+
+

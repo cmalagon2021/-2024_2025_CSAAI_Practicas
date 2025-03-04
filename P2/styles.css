@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
 /* Reset básico y tipografía */
 * {
     box-sizing: border-box;
@@ -7,8 +9,8 @@
   
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: #f7f7f7;
-    color: #333;
+    background-color: #333;
+    color: #f7f7f7;
     line-height: 1.6;
   }
   
@@ -27,16 +29,16 @@
     text-decoration: none;
     font-weight: 500;
     color: #fff;
-    background-color: #007aff;
+    background-color: #333;
     border: none;
     border-radius: 12px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(219, 219, 219, 0.3);
   }
   
   .btn:hover {
-    background-color: #005bb5;
+    background-color: #a30000;
     transform: translateY(-2px);
   }
   
@@ -54,7 +56,7 @@
   #main-screen p {
     font-size: 1.2em;
     margin-bottom: 20px;
-    color: #555;
+    color: #f7f7f7;
   }
   
   #main-screen h2 {
@@ -84,9 +86,9 @@
   
   /* Estilos para el juego */
   #game {
-    background-color: #fff;
+    background-color: #333;
     border-radius: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 12px rgba(192, 192, 192, 0.3);
     padding: 30px;
     text-align: center;
     margin: 20px auto;
@@ -123,7 +125,7 @@
   #timer {
     font-size: 1.2em;
     margin: 15px 0;
-    color: #555;
+    color: #f7f7f7;
   }
   
   /* Botones del juego */
@@ -148,11 +150,11 @@
     margin: 8px;
     border: none;
     border-radius: 12px;
-    background-color: #007aff;
+    background-color: #333;
     color: #fff;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.3);
   }
   
   #digitButtons button:hover,
@@ -174,7 +176,7 @@
   }
   
   /* Responsive: en móviles se muestra un teclado de 3 columnas */
-  @media (max-width: 600px) {
+  @media (max-width: 750px) {
     #digitButtons {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -245,3 +247,38 @@
       "ELSH" 6.5;
   }
   
+
+/* Actualización del estilo del cronómetro */
+#timer {
+  font-size: 2.5em;         /* Aumenta el tamaño para destacar */
+  font-family: 'Orbitron', sans-serif;  /* Fuente tecnológica */
+  color: #a30000;           /* Puedes ajustar el color si lo deseas */
+  margin: 20px 0;
+  letter-spacing: 2px;       /* Espaciado entre dígitos para un look más digital */
+}
+
+
+/* Botón redondo para volver a la página principal */
+.home-btn {
+  position: center;
+  top: 20px;
+  left: 20px;
+  width: 50px;
+  height: 50px;
+  background-color: #333;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  transition: background-color 0.3s ease;
+  z-index: 1100;
+}
+
+.home-btn:hover {
+  background-color: #005bb5;
+}
+
+
