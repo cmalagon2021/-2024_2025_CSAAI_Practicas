@@ -1,0 +1,247 @@
+/* Reset básico y tipografía */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  /* Contenedor común */
+  .container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+  }
+  
+  /* Botón general */
+  .btn {
+    display: inline-block;
+    padding: 12px 24px;
+    margin: 10px;
+    text-decoration: none;
+    font-weight: 500;
+    color: #fff;
+    background-color: #007aff;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .btn:hover {
+    background-color: #005bb5;
+    transform: translateY(-2px);
+  }
+  
+  /* Estilos para la pantalla principal */
+  #main-screen {
+    text-align: center;
+    padding: 40px 20px;
+  }
+  
+  #main-screen h1 {
+    font-size: 2.8em;
+    margin-bottom: 20px;
+  }
+  
+  #main-screen p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    color: #555;
+  }
+  
+  #main-screen h2 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+  }
+  
+  #main-screen ul {
+    list-style: none;
+    text-align: left;
+    margin: 20px auto;
+    padding: 0;
+    max-width: 500px;
+    border: 1px solid #e5e5ea;
+    border-radius: 10px;
+    background-color: #fff;
+  }
+  
+  #main-screen ul li {
+    padding: 12px 15px;
+    border-bottom: 1px solid #e5e5ea;
+  }
+  
+  #main-screen ul li:last-child {
+    border-bottom: none;
+  }
+  
+  /* Estilos para el juego */
+  #game {
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 30px;
+    text-align: center;
+    margin: 20px auto;
+  }
+  
+  #game h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Clave secreta */
+  #secretKey {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+  }
+  
+  .digit {
+    margin: 0 10px;
+  }
+  
+  /* Números ocultos (manteniendo el color de asteriscos) */
+  .hidden-digit {
+    color: #c00000;
+  }
+  
+  /* Números revelados (tono verde característico) */
+  .revealed-digit {
+    color: #3ca300;
+  }
+  
+  /* Intentos y cronómetro */
+  #attempts,
+  #timer {
+    font-size: 1.2em;
+    margin: 15px 0;
+    color: #555;
+  }
+  
+  /* Botones del juego */
+  #buttons {
+    margin-top: 20px;
+  }
+  
+  /* Contenedor de los botones de dígitos */
+  #digitButtons {
+    /* En pantallas grandes, disposición horizontal */
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: nowrap;
+  }
+  
+  /* Botones generales (incluidos los de control) */
+  #digitButtons button,
+  #controlButtons button {
+    font-size: 1.1em;
+    padding: 12px 18px;
+    margin: 8px;
+    border: none;
+    border-radius: 12px;
+    background-color: #007aff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  #digitButtons button:hover,
+  #controlButtons button:hover {
+    background-color: #005bb5;
+    transform: translateY(-2px);
+  }
+  
+  /* Botones de dígitos redondos */
+  #digitButtons button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    padding: 0;
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Responsive: en móviles se muestra un teclado de 3 columnas */
+  @media (max-width: 600px) {
+    #digitButtons {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    /* Centrar el último botón (10º dígito) en la cuarta fila */
+    #digitButtons button:last-child {
+      grid-column: 2;
+    }
+  }
+  
+  /* Estilos para el modal emergente (pop-out) */
+  .modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    
+    /* Centrado usando flex */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #e5e5ea;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    color: #333;
+  }
+  
+  .close-btn {
+    float: right;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+  }
+  
+  .close-btn:hover {
+    color: #c00000;
+  }
+  
+  .material-symbols-outlined {
+    font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24;
+  }
+  
+  .handjet {
+    font-family: "Handjet", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-variation-settings:
+      "ELGR" 1.4,
+      "ELSH" 6.5;
+  }
+  

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Práctica 2</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=home" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=settings" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=play_arrow" />
+</head>
+<body>
+  <div id="main-screen" class="container">
+    <h1>¡BOOM!</h1>
+    <p>
+      En este juego tendrás que adivinar una clave secreta compuesta por 4 dígitos (del 0 al 9) lo más rápido posible.
+    </p>
+    <div>
+      <a class="btn" href="https://github.com/tu_usuario/tu_repositorio" target="_blank">
+        Volver al Repo</a>
+      <a class="btn" href="juego.html">
+        <span class="material-symbols-outlined">play_arrow</span>
+      </a>
+      <button class="btn" id="openRules">Reglas del juego</button>
+    </div>
+  </div>
+  
+  <!-- Modal para las reglas del juego -->
+  <div id="rulesModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeModal">&times;</span>
+      <h2>Reglas del juego</h2>
+      <ul>
+        <li>La clave secreta se genera aleatoriamente y se oculta con asteriscos.</li>
+        <li>Tienes un máximo de 10 intentos para adivinarla.</li>
+        <li>Al pulsar un dígito se iniciará un cronómetro y se comprobará si forma parte de la clave.</li>
+        <li>Si aciertas, el dígito se mostrará en su posición correspondiente y cambiará de color.</li>
+        <li>Si agotas los 10 intentos sin descubrir la clave, perderás la partida.</li>
+        <li>Cuando descubras la clave completa, el cronómetro se detendrá.</li>
+      </ul>
+    </div>
+  </div>
+  
+  <script>
+    // Referencias al modal y botones
+    const modal = document.getElementById("rulesModal");
+    const openRulesBtn = document.getElementById("openRules");
+    const closeModalBtn = document.getElementById("closeModal");
+
+    // Abre el modal al pulsar "Reglas del juego"
+    openRulesBtn.addEventListener("click", () => {
+      modal.style.display = "flex";
+    });
+
+    // Cierra el modal al pulsar el botón de cierre (×)
+    closeModalBtn.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+
+    // Cierra el modal si se hace clic fuera del contenido
+    window.addEventListener("click", (event) => {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Juego de Clave Secreta</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Adivina la Clave Secreta</h1>
+  <div id="game">
+    <!-- Espacio para mostrar la clave secreta (inicialmente oculta con asteriscos) -->
+    <div id="secretKey">
+      <span class="digit hidden-digit">*</span>
+      <span class="digit hidden-digit">*</span>
+      <span class="digit hidden-digit">*</span>
+      <span class="digit hidden-digit">*</span>
+    </div>
+    
+    <!-- Espacio para mostrar los intentos restantes -->
+    <div id="attempts">Intentos restantes: 10</div>
+    
+    <!-- Espacio para mostrar el cronómetro -->
+    <div id="timer">0:0:0</div>
+    
+    <!-- Botones para ingresar dígitos y controles -->
+    <div id="buttons">
+      <div id="digitButtons">
+        <!-- Botones del 0 al 9 -->
+        <button class="digit-btn" data-digit="1">1</button>
+        <button class="digit-btn" data-digit="2">2</button>
+        <button class="digit-btn" data-digit="3">3</button>
+        <button class="digit-btn" data-digit="4">4</button>
+        <button class="digit-btn" data-digit="5">5</button>
+        <button class="digit-btn" data-digit="6">6</button>
+        <button class="digit-btn" data-digit="7">7</button>
+        <button class="digit-btn" data-digit="8">8</button>
+        <button class="digit-btn" data-digit="9">9</button>
+        <button class="digit-btn" data-digit="0">0</button>
+      </div>
+      <div id="controlButtons">
+        <button id="start">Start</button>
+        <button id="stop">Stop</button>
+        <button id="reset">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Se incluye el cronómetro -->
+  <script src="crono.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
