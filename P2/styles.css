@@ -159,8 +159,11 @@
   
   #digitButtons button:hover,
   #controlButtons button:hover {
-    background-color: #005bb5;
-    transform: translateY(-2px);
+    background-color: #f7f7f7;
+    transform: translateY(-3px);
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    
   }
   
   /* Botones de dígitos redondos */
@@ -266,7 +269,7 @@
   width: 50px;
   height: 50px;
   background-color: #333;
-  color: #fff;
+  color: #f7f7f7;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -278,7 +281,11 @@
 }
 
 .home-btn:hover {
-  background-color: #005bb5;
+  
+  color: #333;
+  background-color: #f7f7f7;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.8);
+  
 }
 
 
