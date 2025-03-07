@@ -306,3 +306,29 @@ body {
     padding: 15px;
   }
 }
+
+
+
+/* Panel inferior de reglas (Bottom Sheet) */
+.rules-panel {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #333;
+  /* Oculto inicialmente: se desliza hacia abajo y se vuelve invisible */
+  transform: translateY(100%);
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+  box-shadow: 0 -2px 10px rgba(255, 255, 255, 0.8);
+  z-index: 1100;
+}
+
+.rules-panel.active {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Resto de tu CSS (contenedores, botones, etc.) se mantiene igual */
