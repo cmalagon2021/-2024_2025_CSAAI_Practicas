@@ -2,32 +2,37 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Práctica 2</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=home" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=settings" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=play_arrow" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=home" />
+
 </head>
+
 <body>
   <div id="main-screen" class="container">
     <h1>¡BOOM!</h1>
     <p>
-      En este juego tendrás que adivinar una clave secreta compuesta por 4 dígitos (del 0 al 9) lo más rápido posible.
+       Adivina la clave secreta antes de que explote la bomba...
     </p>
-    <div>
-      <a class="btn" href="https://cmalagon2021.github.io/-2024_2025_CSAAI_Practicas"target="_blank">
-        Volver al Repo</a>
-      <a class="btn" href="juego.html">
+    <!-- Contenedor para los botones, alineados horizontalmente -->
+    <div class="button-container">
+      <a href="index.html" class="home-btn">repo</span>
+       </a>
+      <a class="home-btn" href="juego.html">
         <span class="material-symbols-outlined">play_arrow</span>
       </a>
-      <button class="btn" id="openRules">Reglas del juego</button>
+      <button class="home-btn" id="openRules">?</button>
     </div>
   </div>
   
-  <!-- Modal para las reglas del juego -->
-  <div id="rulesModal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" id="closeModal">&times;</span>
+  <!-- Panel inferior de reglas (Bottom Sheet) -->
+  <div id="rulesPanel" class="rules-panel">
+    <div class="rules-panel-content">
+      <span class="close-btn" id="closeRulesPanel">&times;</span>
       <h2>Reglas del juego</h2>
       <ul>
         <li>La clave secreta se genera aleatoriamente y se oculta con asteriscos.</li>
@@ -41,26 +46,17 @@
   </div>
   
   <script>
-    // Referencias al modal y botones
-    const modal = document.getElementById("rulesModal");
+    // Lógica para mostrar y ocultar el panel inferior de reglas
+    const rulesPanel = document.getElementById("rulesPanel");
     const openRulesBtn = document.getElementById("openRules");
-    const closeModalBtn = document.getElementById("closeModal");
+    const closeRulesPanelBtn = document.getElementById("closeRulesPanel");
 
-    // Abre el modal al pulsar "Reglas del juego"
     openRulesBtn.addEventListener("click", () => {
-      modal.style.display = "flex";
+      rulesPanel.classList.add("active");
     });
 
-    // Cierra el modal al pulsar el botón de cierre (×)
-    closeModalBtn.addEventListener("click", () => {
-      modal.style.display = "none";
-    });
-
-    // Cierra el modal si se hace clic fuera del contenido
-    window.addEventListener("click", (event) => {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
+    closeRulesPanelBtn.addEventListener("click", () => {
+      rulesPanel.classList.remove("active");
     });
   </script>
 </body>
