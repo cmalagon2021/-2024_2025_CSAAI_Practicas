@@ -43,6 +43,29 @@ function isGameWon() {
   return revealed.every(val => val === true);
 }
 
+/* Funciones para mostrar/ocultar el mensaje modal */
+function showMessage(title, text) {
+  const messageModal = document.getElementById("messageModal");
+  const messageTitle = document.getElementById("messageTitle");
+  const messageText = document.getElementById("messageText");
+  
+  messageTitle.textContent = title;
+  messageText.textContent = text;
+  
+  messageModal.classList.add("active");
+}
+
+function hideMessage() {
+  const messageModal = document.getElementById("messageModal");
+  messageModal.classList.remove("active");
+}
+
+// Event listener para cerrar el mensaje
+const closeMessageBtn = document.getElementById("closeMessage");
+if (closeMessageBtn) {
+  closeMessageBtn.addEventListener("click", hideMessage);
+}
+
 // Función para manejar el clic en un botón de dígito
 function handleDigitClick(e) {
   // Si es el primer intento, se inicia el cronómetro
@@ -71,17 +94,17 @@ function handleDigitClick(e) {
   attemptsRemaining--;
   updateAttempts();
   
-  // Si se han acertado todos los dígitos, detener el cronómetro
+  // Si se han acertado todos los dígitos, detener el cronómetro y mostrar mensaje de enhorabuena
   if (isGameWon()) {
     crono.stop();
-    alert("¡Felicidades! Has descubierto la clave secreta.");
-    // Se podría reiniciar la partida o esperar a que el usuario pulse Reset.
+    showMessage("BOMBA DESACTIVADA", "¡Felicidades! Has desactivado la bomba.");
+    // Aquí podrías reiniciar el juego automáticamente o esperar a que el usuario cierre el mensaje
   }
   
-  // Si se han agotado los intentos sin ganar, mostrar mensaje y reiniciar partida
+  // Si se han agotado los intentos sin ganar, detener el cronómetro y mostrar mensaje de explosión
   if (attemptsRemaining <= 0 && !isGameWon()) {
     crono.stop();
-    alert("¡Juego terminado! Se han agotado los intentos.");
+    showMessage("¡BOOM!", "¡La bomba ha explotado! No lograste desactivarla.");
     resetGame();
   }
 }
@@ -112,6 +135,7 @@ startBtn.addEventListener("click", () => {
 
 stopBtn.addEventListener("click", () => {
   crono.stop();
+  gameStarted = false; // Permite reiniciar el cronómetro posteriormente
 });
 
 resetBtn.addEventListener("click", () => {
@@ -123,5 +147,3 @@ window.onload = () => {
   generateSecretCode();
   updateAttempts();
 };
-
-
