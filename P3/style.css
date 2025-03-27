@@ -1,0 +1,259 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+/* Variables de colores inspiradas en Nothing */
+:root {
+  --primary-color: #f7f7f7;       /* Cian brillante */
+  --primary-hover: #cd0000;       /* Cian un poco más oscuro */
+  --accent-color: #ff4081;        /* Toque sutil en rosa */
+  --overlay-bg: rgba(0, 0, 0, 0.85);
+  --bg-gradient-start: #121212;   /* Negro/Gris muy oscuro */
+  --bg-gradient-middle: #1e1e1e;  /* Gris oscuro */
+  --bg-gradient-end: #2c2c2c;     /* Gris medio oscuro */
+  --text-color: #e0e0e0;          /* Blanco suave */
+}
+
+/* Global resets y box-sizing */
+* {
+  box-sizing: border-box;
+}
+
+/* Fondo animado con un degradado sofisticado */
+body {
+  margin: 0;
+  background: linear-gradient(-45deg, var(--bg-gradient-start), var(--bg-gradient-middle), var(--bg-gradient-end), #3a3a3a);
+  background-size: 400% 400%;
+  animation: gradientAnimation 20s ease infinite;
+  overflow-x: hidden;
+  font-family: 'Orbitron', sans-serif;
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+/* Animación del gradiente */
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Estilos para el lobby (index.html) */
+.lobby {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 90%;
+  margin: 20px;
+  box-shadow: 0 0 15px rgba(255, 252, 252, 0.76);
+}
+.lobby h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+.lobby p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-color);
+}
+#startButton {
+  font-size: 1.5rem;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--primary-color);
+  color: #000;
+  cursor: pointer;
+  transition: transform 0.3s;
+  box-shadow: 0 0 10px #121212;
+}
+#startButton:hover {
+  transform: scale(1.05);
+  background-color: var(--primary-hover);
+  color: var(--primary-color)
+}
+
+/* Encabezado del juego */
+header {
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--primary-color);
+  
+}
+header h1 {
+  font-size: 2.5rem;
+  text-shadow: 2px 2px 4px #000;
+}
+
+/* Contenedor principal del juego */
+.game-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  max-width: 600px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 30px var(--primary-color);
+}
+
+/* Estilos para el canvas del juego */
+canvas {
+  background: #000;
+  border: 3px solid var(--primary-color);
+  box-shadow: 0 0 30px var(--primary-color);
+  animation: pulse 2s infinite;
+  width: 100%;
+  height: auto;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 20px var(--primary-color); }
+  50% { box-shadow: 0 0 40px var(--primary-color); }
+  100% { box-shadow: 0 0 20px var(--primary-color); }
+}
+
+/* Estilos para overlays (pausa y fin de partida) */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--overlay-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+.overlay-content {
+  text-align: center;
+}
+.overlay-content h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: var(--primary-color);
+}
+.overlay-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+.overlay-buttons button {
+  font-size: 1rem;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--primary-color);
+  color: #000;
+  cursor: pointer;
+  box-shadow: 0 0 10px var(--primary-color);
+  transition: background-color 0.3s, transform 0.3s;
+}
+.overlay-buttons button:hover {
+  background-color: var(--primary-hover);
+  transform: scale(1.05);
+}
+
+/* Clase para ocultar elementos */
+.hidden {
+  display: none;
+}
+
+/* Estilos para controles táctiles, ubicados fuera del canvas */
+.touch-controls {
+  width: 90%;
+  max-width: 600px;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+.touch-controls button {
+  font-size: 1.5rem;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.7);
+  color: #000;
+  box-shadow: 0 0 10px var(--primary-color);
+}
+
+/* Mostrar controles táctiles solo en móviles */
+@media (min-width: 768px) {
+  .touch-controls {
+    display: none;
+  }
+}
+
+
+
+
+/* Botón general */
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  margin: 10px;
+  text-decoration: none;
+  font-weight: 500;
+  color: #fff;
+  background-color: #333;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 4px rgba(219, 219, 219, 0.3);
+}
+
+.btn:hover {
+  background-color: #a30000;
+  transform: translateY(-2px);
+}
+
+/* Contenedor para agrupar y centrar botones */
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+/* Botón redondo (home y play) */
+.home-btn {
+  width: 50px;
+  height: 50px;
+  background-color: #333;
+  color: #f7f7f7;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
+  transition: background-color 0.3s ease;
+  z-index: 1100;
+}
+
+.home-btn:hover {
+  color: #333;
+  background-color: #f7f7f7;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}
+
+/* Configuración del icono de Google Fonts */
+.material-symbols-outlined {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+}
+
+

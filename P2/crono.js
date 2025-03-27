@@ -62,3 +62,5 @@ class Crono {
         this.display.innerHTML = "0:0:0";
     }
 }
+
+
