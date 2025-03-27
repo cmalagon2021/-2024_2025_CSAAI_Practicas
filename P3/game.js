@@ -1,6 +1,3 @@
-
-
-
 // Obtener el canvas y su contexto
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
@@ -19,6 +16,10 @@ explosionSprite.src = "explosion.gif";
 // Cargar la imagen de corazón para mostrar vidas
 const heartImg = new Image();
 heartImg.src = "corazon.webp";
+
+// Cargar sonidos
+const gunSound = new Audio('gun.mp3');
+const explosionSound = new Audio('explosion.mp3');
 
 // Propiedades de la nave del jugador
 const spaceship = {
@@ -248,6 +249,9 @@ function collisionDetection() {
         aliens[j].explosionTimer = 15; // 15 frames de explosión
         addScorePopup(aliens[j].x + aliens[j].width / 2, aliens[j].y + aliens[j].height / 2, "+10");
         score += 10;
+        // Reproducir sonido de explosión
+        explosionSound.currentTime = 0;
+        explosionSound.play();
         bullets.splice(i, 1);
         break;
       }
@@ -267,9 +271,11 @@ function checkEnemyBulletCollision() {
       enemyBullets.splice(i, 1);
       lives--; // Se pierde una vida
       
-      // Mostrar explosión en la nave del jugador
+      // Mostrar explosión en la nave del jugador y reproducir sonido
       spaceship.exploding = true;
       spaceship.explosionTimer = 15; // mostrar gif por 15 frames
+      explosionSound.currentTime = 0;
+      explosionSound.play();
     }
   }
 }
@@ -346,6 +352,7 @@ function update() {
             width: enemyBulletWidth,
             height: enemyBulletHeight
           });
+          // Opcional: podrías reproducir un sonido de disparo para enemigos si lo deseas
         }
       }
     }
@@ -411,6 +418,9 @@ function keyDown(e) {
   } else if (e.key === "ArrowLeft" || e.key === "a") {
     spaceship.dx = -spaceship.speed;
   } else if (e.key === " ") {
+    // Reproducir sonido de disparo y disparar
+    gunSound.currentTime = 0;
+    gunSound.play();
     bullets.push({
       x: spaceship.x + spaceship.width / 2 - bulletWidth / 2,
       y: spaceship.y
@@ -460,6 +470,9 @@ function setupTouchControls() {
 
   touchFire.addEventListener("touchstart", function(e) {
     e.preventDefault();
+    // Reproducir sonido de disparo al tocar
+    gunSound.currentTime = 0;
+    gunSound.play();
     bullets.push({
       x: spaceship.x + spaceship.width / 2 - bulletWidth / 2,
       y: spaceship.y
@@ -482,6 +495,3 @@ function togglePause() {
 createAliens();
 setupTouchControls();
 update();
-
-
-
