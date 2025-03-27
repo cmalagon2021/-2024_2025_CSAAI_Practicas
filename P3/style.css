@@ -40,17 +40,41 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-/* Estilos para el lobby (index.html) */
+/* Estilos metalizados para el lobby */
 .lobby {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  padding: 20px;
+  position: relative; /* necesario para el pseudo-elemento */
+  background: #3d3d3d;
+  background: linear-gradient(135deg, #4a4a4a, #2e2e2e, #4a4a4a);
   border-radius: 10px;
+  padding: 20px;
   text-align: center;
   max-width: 90%;
   margin: 20px;
-  box-shadow: 0 0 15px rgba(255, 252, 252, 0.76);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  overflow: hidden; /* para que el destello no se salga */
 }
+
+/* Pseudo-elemento para el destello metalizado */
+.lobby::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+  transform: skewX(-25deg);
+  animation: shine 2s infinite;
+}
+
+/* Animación del destello */
+@keyframes shine {
+  0% { left: -75%; }
+  100% { left: 125%; }
+}
+
+
+
 .lobby h1 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
