@@ -1,15 +1,18 @@
-// Obtener el canvas y su contexto
+// Obtener el canvas y su contexto (solo se ejecuta en juego.html)
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
-// Cargar imágenes para la nave del jugador y la nave enemiga
+// Cargar imagen de la nave del jugador según la skin elegida en el lobby
 const spaceshipImg = new Image();
-spaceshipImg.src = "nave_buena.png";
+const selectedSkin = localStorage.getItem("selectedSkin");
+spaceshipImg.src = selectedSkin ? selectedSkin : "nave_buena.png";
 
+
+// Cargar imágenes para la nave enemiga
 const alienImg = new Image();
 alienImg.src = "nave_mala.webp";
 
-// Cargar el gif de explosión para cuando se impacte (se usa tanto para enemigos como para el jugador)
+// Cargar el gif de explosión para cuando se impacte
 const explosionSprite = new Image();
 explosionSprite.src = "explosion.gif";
 
@@ -32,6 +35,9 @@ const spaceship = {
   exploding: false,
   explosionTimer: 0
 };
+
+
+
 
 // Balas disparadas por el jugador
 const bullets = [];
@@ -491,7 +497,11 @@ function togglePause() {
   }
 }
 
+
+
 // Inicializar la cuadrícula de enemigos, controles táctiles y comenzar el juego
 createAliens();
 setupTouchControls();
 update();
+
+

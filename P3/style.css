@@ -281,3 +281,38 @@ canvas {
 }
 
 
+/* Estilos para el selector de skin */
+.skin-selector {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.skin-selector p {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  color: var(--primary-color);
+}
+
+.skin-options {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.skin-option {
+  width: 80px;
+  height: auto;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: border 0.3s;
+}
+
+.skin-option:hover {
+  border: 2px solid var(--primary-color);
+}
+
+.skin-option.selected {
+  border: 2px solid var(--primary-color);
+}

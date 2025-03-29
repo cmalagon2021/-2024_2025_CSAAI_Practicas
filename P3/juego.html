@@ -14,7 +14,7 @@
   </header>
   <div class="game-container">
     <canvas id="gameCanvas" width="600" height="600"></canvas>
-    <!-- Overlay de pausa -->
+    <!-- Aquí van los overlays de pausa y fin de partida -->
     <div id="pauseScreen" class="hidden overlay">
       <div class="overlay-content">
         <h2>PAUSA</h2>
@@ -25,7 +25,6 @@
         </div>
       </div>
     </div>
-    <!-- Overlay de fin de partida -->
     <div id="endScreen" class="hidden overlay">
       <div class="overlay-content">
         <h2 id="endMessage"></h2>
@@ -36,15 +35,16 @@
       </div>
     </div>
   </div>
-  <!-- Controles táctiles para dispositivos móviles, ubicados fuera del canvas -->
+  <!-- Controles táctiles para dispositivos móviles -->
   <div id="touchControls" class="touch-controls">
     <button id="touchLeft">◀</button>
     <button id="touchFire">●</button>
     <button id="touchRight">▶</button>
   </div>
+  <!-- Aquí sí cargamos game.js, ya que en esta página existe el canvas -->
   <script src="game.js"></script>
   <script>
-    // Botones del overlay de pausa
+    // Configurar botones de los overlays (pausa y fin de partida)
     document.getElementById("continueButton").addEventListener("click", function() {
       document.getElementById("pauseScreen").classList.add("hidden");
       window.paused = false;
@@ -55,7 +55,6 @@
     document.getElementById("homeButton").addEventListener("click", function() {
       window.location.href = "index.html";
     });
-    // Botones del overlay de fin de partida
     document.getElementById("endRestartButton").addEventListener("click", function() {
       window.location.reload();
     });
