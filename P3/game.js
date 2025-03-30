@@ -160,7 +160,7 @@ function drawSpaceship() {
 function drawBullets() {
   ctx.save();
   ctx.shadowBlur = 15;
-  ctx.shadowColor = "magenta";
+  ctx.shadowColor = "red";
   ctx.fillStyle = "red";
   bullets.forEach(bullet => {
     ctx.fillRect(bullet.x, bullet.y, bulletWidth, bulletHeight);
@@ -186,7 +186,8 @@ function drawAliens() {
 // Dibuja los proyectiles disparados por los enemigos
 function drawEnemyBullets() {
   ctx.save();
-  ctx.fillStyle = "red";
+  ctx.fillStyle = "green";
+  ctx.shadowColor = "lime";
   enemyBullets.forEach(bullet => {
     ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
   });
