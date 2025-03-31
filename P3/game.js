@@ -7,7 +7,6 @@ const spaceshipImg = new Image();
 const selectedSkin = localStorage.getItem("selectedSkin");
 spaceshipImg.src = selectedSkin ? selectedSkin : "nave_buena.png";
 
-
 // Cargar imágenes para la nave enemiga
 const alienImg = new Image();
 alienImg.src = "nave_mala.webp";
@@ -24,7 +23,7 @@ heartImg.src = "corazon.webp";
 const gunSound = new Audio('gun.mp3');
 const explosionSound = new Audio('explosion.mp3');
 
-// Propiedades de la nave del jugador
+// Propiedades de la nave del jugador (se añade energía para el escudo)
 const spaceship = {
   x: canvas.width / 2 - 15,
   y: canvas.height - 40,
@@ -33,11 +32,12 @@ const spaceship = {
   speed: 5,
   dx: 0,
   exploding: false,
-  explosionTimer: 0
+  explosionTimer: 0,
+  energy: 100  // Escudo/energía máximo 100
 };
 
-
-
+// Variable para upgrade desbloqueable
+let unlockedUpgrade = false;
 
 // Balas disparadas por el jugador
 const bullets = [];
@@ -89,7 +89,7 @@ function createAliens() {
     for (let col = 0; col < alienCols; col++) {
       const x = alienOffsetLeft + col * (alienWidth + alienPadding);
       const y = alienOffsetTop + row * (alienHeight + alienPadding);
-      // Cada enemigo tiene propiedades para explosion
+      // Cada enemigo tiene propiedades para explosión
       aliens.push({ 
         x, 
         y, 
@@ -216,7 +216,6 @@ function moveBullets() {
 function moveAliens() {
   let hitEdge = false;
   aliens.forEach(alien => {
-    // Solo mover si no está explotando
     if (!alien.exploding) {
       alien.x += alienSpeed * alienDirection;
       if (alien.x + alien.width > canvas.width || alien.x < 0) {
@@ -251,12 +250,10 @@ function collisionDetection() {
           bullets[i].x + bulletWidth > aliens[j].x &&
           bullets[i].y < aliens[j].y + aliens[j].height &&
           bullets[i].y + bulletHeight > aliens[j].y) {
-        // Marcar al enemigo como explotando y establecer un timer
         aliens[j].exploding = true;
         aliens[j].explosionTimer = 15; // 15 frames de explosión
         addScorePopup(aliens[j].x + aliens[j].width / 2, aliens[j].y + aliens[j].height / 2, "+10");
         score += 10;
-        // Reproducir sonido de explosión
         explosionSound.currentTime = 0;
         explosionSound.play();
         bullets.splice(i, 1);
@@ -276,18 +273,22 @@ function checkEnemyBulletCollision() {
       enemyBullets[i].y + enemyBullets[i].height > spaceship.y
     ) {
       enemyBullets.splice(i, 1);
-      lives--; // Se pierde una vida
-      
-      // Mostrar explosión en la nave del jugador y reproducir sonido
-      spaceship.exploding = true;
-      spaceship.explosionTimer = 15; // mostrar gif por 15 frames
+      // Reducir energía en 20
+      spaceship.energy -= 20;
       explosionSound.currentTime = 0;
       explosionSound.play();
+      spaceship.exploding = true;
+      spaceship.explosionTimer = 15;
+      // Si la energía se agota, se pierde una vida y se reinicia el medidor
+      if (spaceship.energy <= 0) {
+        lives--;
+        spaceship.energy = 100;
+      }
     }
   }
 }
 
-// Comprueba condición de fin de juego: si se quedan sin vidas o si un enemigo llega al jugador
+// Comprueba condición de fin de juego: si se quedan sin vidas o si un enemigo alcanza la nave
 function checkGameOver() {
   if (lives <= 0) return true;
   for (let alien of aliens) {
@@ -298,13 +299,14 @@ function checkGameOver() {
   return false;
 }
 
-// Dibuja el HUD: muestra nivel, score y las vidas restantes usando la imagen 'corazon.png'
+// Dibuja el HUD: nivel, score, vidas y medidor de energía
 function drawHUD() {
   ctx.save();
   ctx.fillStyle = "cyan";
   ctx.font = "20px Orbitron, sans-serif";
   ctx.fillText("Nivel: " + level, 10, 30);
   ctx.fillText("Score: " + score, 10, 60);
+  
   // Dibujar vidas en la esquina superior derecha
   const heartWidth = 20;
   const heartHeight = 20;
@@ -312,6 +314,16 @@ function drawHUD() {
   for (let i = 0; i < lives; i++) {
     ctx.drawImage(heartImg, canvas.width - (heartWidth + spacing) * (i + 1), 10, heartWidth, heartHeight);
   }
+  
+  // Dibujar medidor de energía debajo del puntaje
+  const barX = 10, barY = 80, barWidth = 150, barHeight = 15;
+  ctx.strokeStyle = "cyan";
+  ctx.lineWidth = 2;
+  ctx.strokeRect(barX, barY, barWidth, barHeight);
+  ctx.fillStyle = "cyan";
+  const energyWidth = (spaceship.energy / 100) * barWidth;
+  ctx.fillRect(barX, barY, energyWidth, barHeight);
+  
   ctx.restore();
 }
 
@@ -330,7 +342,13 @@ function drawPauseOverlay() {
 function update() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   
-  // Actualizar el timer de explosión de la nave del jugador si está en modo "exploding"
+  // Upgrade desbloqueable: al alcanzar 100 puntos, cambiar skin
+  if (score >= 1000 && !unlockedUpgrade) {
+    spaceshipImg.src = "nave_upgraded.png";
+    unlockedUpgrade = true;
+    addScorePopup(spaceship.x, spaceship.y, "¡Upgrade!");
+  }
+  
   if (spaceship.exploding) {
     spaceship.explosionTimer--;
     if (spaceship.explosionTimer <= 0) {
@@ -344,22 +362,20 @@ function update() {
     moveAliens();
     collisionDetection();
     
-    // Lógica de disparo enemigo: a partir del nivel 2, periódicamente un enemigo dispara
+    // Disparo enemigo: a partir del nivel 2
     if (level >= 2 && aliens.length > 0) {
       enemyShootTimer++;
       if (enemyShootTimer >= enemyShootInterval) {
         enemyShootTimer = 0;
-        // Elegir aleatoriamente un enemigo que no esté explotando
-        let potenciales = aliens.filter(alien => !alien.exploding);
+        const potenciales = aliens.filter(alien => !alien.exploding);
         if (potenciales.length > 0) {
-          let shooter = potenciales[Math.floor(Math.random() * potenciales.length)];
+          const shooter = potenciales[Math.floor(Math.random() * potenciales.length)];
           enemyBullets.push({
             x: shooter.x + shooter.width / 2 - enemyBulletWidth / 2,
             y: shooter.y + shooter.height,
             width: enemyBulletWidth,
             height: enemyBulletHeight
           });
-          // Opcional: podrías reproducir un sonido de disparo para enemigos si lo deseas
         }
       }
     }
@@ -397,7 +413,6 @@ function update() {
   }
   
   if (aliens.length === 0) {
-    // Se considera victoria al completar 5 rondas (nivel 5 finalizado)
     if (level === 5) {
       victoryFlag = true;
       showEndScreen("¡VICTORIA!");
@@ -425,7 +440,6 @@ function keyDown(e) {
   } else if (e.key === "ArrowLeft" || e.key === "a") {
     spaceship.dx = -spaceship.speed;
   } else if (e.key === " ") {
-    // Reproducir sonido de disparo y disparar
     gunSound.currentTime = 0;
     gunSound.play();
     bullets.push({
@@ -438,12 +452,7 @@ function keyDown(e) {
 }
 
 function keyUp(e) {
-  if (
-    e.key === "ArrowRight" ||
-    e.key === "ArrowLeft" ||
-    e.key === "a" ||
-    e.key === "d"
-  ) {
+  if (e.key === "ArrowRight" || e.key === "ArrowLeft" || e.key === "a" || e.key === "d") {
     spaceship.dx = 0;
   }
 }
@@ -477,7 +486,6 @@ function setupTouchControls() {
 
   touchFire.addEventListener("touchstart", function(e) {
     e.preventDefault();
-    // Reproducir sonido de disparo al tocar
     gunSound.currentTime = 0;
     gunSound.play();
     bullets.push({
@@ -498,11 +506,7 @@ function togglePause() {
   }
 }
 
-
-
 // Inicializar la cuadrícula de enemigos, controles táctiles y comenzar el juego
 createAliens();
 setupTouchControls();
 update();
-
-
