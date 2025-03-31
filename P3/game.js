@@ -7,7 +7,7 @@ const spaceshipImg = new Image();
 const selectedSkin = localStorage.getItem("selectedSkin");
 spaceshipImg.src = selectedSkin ? selectedSkin : "nave_buena.png";
 
-// Cargar imágenes para la nave enemiga
+// Cargar imágenes para la nave enemiga (usaremos la misma imagen para todos, pero se podría ampliar)
 const alienImg = new Image();
 alienImg.src = "nave_mala.webp";
 
@@ -36,7 +36,7 @@ const spaceship = {
   energy: 100  // Escudo/energía máximo 100
 };
 
-// Variable para upgrade desbloqueable
+// Variable para upgrade desbloqueable (no se usa en este cambio, pero se conserva)
 let unlockedUpgrade = false;
 
 // Balas disparadas por el jugador
@@ -49,8 +49,6 @@ const bulletHeight = 10;
 let level = 1;
 let score = 0;
 const alienCols = 8;
-const alienWidth = 30;
-const alienHeight = 30;
 const alienPadding = 10;
 const alienOffsetTop = 30;
 const alienOffsetLeft = 30;
@@ -81,36 +79,93 @@ let paused = false;
 let gameOverFlag = false;
 let victoryFlag = false;
 
-// Función para crear la cuadrícula de enemigos
+/* Función para obtener las propiedades según el tipo de enemigo */
+function getEnemyProperties(type) {
+  switch (type) {
+    case "normal":
+      return { width: 30, height: 30, hitPoints: 1, speedMultiplier: 1.0 };
+    case "fast":
+      return { width: 30, height: 30, hitPoints: 1, speedMultiplier: 1.5 };
+    case "resistant":
+      return { width: 30, height: 30, hitPoints: 2, speedMultiplier: 1.0 };
+    case "burst":
+      return { width: 30, height: 30, hitPoints: 1, speedMultiplier: 1.0, burst: true };
+    case "boss":
+      return { width: 100, height: 100, hitPoints: 10, speedMultiplier: 0.5 };
+    default:
+      return { width: 30, height: 30, hitPoints: 1, speedMultiplier: 1.0 };
+  }
+}
+
+/* Función para crear un enemigo con tipo dado */
+function createEnemy(x, y, type) {
+  const props = getEnemyProperties(type);
+  return {
+    x,
+    y,
+    width: props.width,
+    height: props.height,
+    type: type,
+    hitPoints: props.hitPoints,
+    speedMultiplier: props.speedMultiplier,
+    burst: props.burst || false,
+    exploding: false,
+    explosionTimer: 0
+  };
+}
+
+/* Función para crear enemigos en nivel normal o jefe */
 function createAliens() {
   aliens = [];
-  const rows = Math.min(3 + level, 6);
-  for (let row = 0; row < rows; row++) {
-    for (let col = 0; col < alienCols; col++) {
-      const x = alienOffsetLeft + col * (alienWidth + alienPadding);
-      const y = alienOffsetTop + row * (alienHeight + alienPadding);
-      // Cada enemigo tiene propiedades para explosión
-      aliens.push({ 
-        x, 
-        y, 
-        width: alienWidth, 
-        height: alienHeight, 
-        exploding: false, 
-        explosionTimer: 0 
-      });
+  // Si el nivel es múltiplo de 5, se crea un jefe
+  if (level % 5 === 0) {
+    // Posicionar al jefe centrado en la parte superior
+    const bossProps = getEnemyProperties("boss");
+    const boss = {
+      x: canvas.width / 2 - bossProps.width / 2,
+      y: alienOffsetTop,
+      width: bossProps.width,
+      height: bossProps.height,
+      type: "boss",
+      hitPoints: bossProps.hitPoints,
+      speedMultiplier: bossProps.speedMultiplier,
+      exploding: false,
+      explosionTimer: 0,
+      
+    };
+    aliens.push(boss);
+  } else {
+    // Crear una cuadrícula de enemigos con tipos aleatorios
+    const rows = Math.min(3 + level, 6);
+    for (let row = 0; row < rows; row++) {
+      for (let col = 0; col < alienCols; col++) {
+        const x = alienOffsetLeft + col * (30 + alienPadding);
+        const y = alienOffsetTop + row * (30 + alienPadding);
+        // Asignar tipo aleatorio: 50% normal, 20% fast, 20% resistant, 10% burst
+        const rand = Math.random();
+        let type = "normal";
+        if (rand < 0.1) {
+          type = "burst";
+        } else if (rand < 0.3) {
+          type = "resistant";
+        } else if (rand < 0.5) {
+          type = "fast";
+        }
+        aliens.push(createEnemy(x, y, type));
+      }
     }
   }
 }
 
-// Función para pasar al siguiente nivel
+/* Función para pasar al siguiente nivel */
 function nextLevel() {
   level++;
   alienSpeed = baseAlienSpeed + (level - 1) * 0.5;
   createAliens();
-  enemyShootTimer = 0; // reiniciamos el temporizador
+  enemyShootTimer = 0; // Reiniciar temporizador
 }
 
-// SISTEMA DE SCORE POPUPS
+/* SISTEMA DE SCORE POPUPS */
 function addScorePopup(x, y, text) {
   scorePopups.push({
     x: x,
@@ -143,7 +198,7 @@ function drawScorePopups() {
   });
 }
 
-// Dibuja la nave del jugador. Si está en modo "exploding", dibuja el gif de explosión.
+/* Dibuja la nave del jugador */
 function drawSpaceship() {
   ctx.save();
   ctx.shadowBlur = 20;
@@ -156,7 +211,7 @@ function drawSpaceship() {
   ctx.restore();
 }
 
-// Dibuja las balas disparadas por el jugador
+/* Dibuja las balas del jugador */
 function drawBullets() {
   ctx.save();
   ctx.shadowBlur = 15;
@@ -168,22 +223,22 @@ function drawBullets() {
   ctx.restore();
 }
 
-// Dibuja los enemigos. Si están explotando, se dibuja el gif de explosión.
+/* Dibuja los enemigos */
 function drawAliens() {
   ctx.save();
   ctx.shadowBlur = 20;
   ctx.shadowColor = "lime";
-  aliens.forEach(alien => {
-    if (alien.exploding) {
-      ctx.drawImage(explosionSprite, alien.x, alien.y, alien.width, alien.height);
+  aliens.forEach(enemy => {
+    if (enemy.exploding) {
+      ctx.drawImage(explosionSprite, enemy.x, enemy.y, enemy.width, enemy.height);
     } else {
-      ctx.drawImage(alienImg, alien.x, alien.y, alien.width, alien.height);
+      ctx.drawImage(alienImg, enemy.x, enemy.y, enemy.width, enemy.height);
     }
   });
   ctx.restore();
 }
 
-// Dibuja los proyectiles disparados por los enemigos
+/* Dibuja los proyectiles de los enemigos */
 function drawEnemyBullets() {
   ctx.save();
   ctx.fillStyle = "green";
@@ -194,7 +249,7 @@ function drawEnemyBullets() {
   ctx.restore();
 }
 
-// Mueve la nave del jugador
+/* Mueve la nave del jugador */
 function moveSpaceship() {
   spaceship.x += spaceship.dx;
   if (spaceship.x < 0) spaceship.x = 0;
@@ -202,7 +257,7 @@ function moveSpaceship() {
     spaceship.x = canvas.width - spaceship.width;
 }
 
-// Mueve las balas del jugador
+/* Mueve las balas del jugador */
 function moveBullets() {
   for (let i = bullets.length - 1; i >= 0; i--) {
     bullets[i].y -= bulletSpeed;
@@ -212,26 +267,26 @@ function moveBullets() {
   }
 }
 
-// Mueve los enemigos y hace que cambien de dirección al llegar a un borde
+/* Mueve los enemigos aplicando su multiplicador de velocidad */
 function moveAliens() {
   let hitEdge = false;
-  aliens.forEach(alien => {
-    if (!alien.exploding) {
-      alien.x += alienSpeed * alienDirection;
-      if (alien.x + alien.width > canvas.width || alien.x < 0) {
+  aliens.forEach(enemy => {
+    if (!enemy.exploding) {
+      enemy.x += alienSpeed * enemy.speedMultiplier * alienDirection;
+      if (enemy.x + enemy.width > canvas.width || enemy.x < 0) {
         hitEdge = true;
       }
     }
   });
   if (hitEdge) {
     alienDirection *= -1;
-    aliens.forEach(alien => {
-      alien.y += alienDrop;
+    aliens.forEach(enemy => {
+      enemy.y += alienDrop;
     });
   }
 }
 
-// Mueve los proyectiles enemigos
+/* Mueve los proyectiles de los enemigos */
 function moveEnemyBullets() {
   for (let i = enemyBullets.length - 1; i >= 0; i--) {
     enemyBullets[i].y += enemyBulletSpeed;
@@ -241,21 +296,27 @@ function moveEnemyBullets() {
   }
 }
 
-// Comprueba colisiones entre las balas del jugador y los enemigos
+/* Comprueba colisiones entre las balas del jugador y los enemigos.
+   Si el enemigo es resistente, se reduce su hitPoints. */
 function collisionDetection() {
   for (let i = bullets.length - 1; i >= 0; i--) {
     for (let j = aliens.length - 1; j >= 0; j--) {
-      if (!aliens[j].exploding &&
-          bullets[i].x < aliens[j].x + aliens[j].width &&
-          bullets[i].x + bulletWidth > aliens[j].x &&
-          bullets[i].y < aliens[j].y + aliens[j].height &&
-          bullets[i].y + bulletHeight > aliens[j].y) {
-        aliens[j].exploding = true;
-        aliens[j].explosionTimer = 15; // 15 frames de explosión
-        addScorePopup(aliens[j].x + aliens[j].width / 2, aliens[j].y + aliens[j].height / 2, "+10");
-        score += 10;
-        explosionSound.currentTime = 0;
-        explosionSound.play();
+      const enemy = aliens[j];
+      if (!enemy.exploding &&
+          bullets[i].x < enemy.x + enemy.width &&
+          bullets[i].x + bulletWidth > enemy.x &&
+          bullets[i].y < enemy.y + enemy.height &&
+          bullets[i].y + bulletHeight > enemy.y) {
+        // Reducir hitPoints si es resistente o jefe
+        enemy.hitPoints--;
+        if (enemy.hitPoints <= 0) {
+          enemy.exploding = true;
+          enemy.explosionTimer = 15;
+          addScorePopup(enemy.x + enemy.width / 2, enemy.y + enemy.height / 2, "+10");
+          score += 10;
+          explosionSound.currentTime = 0;
+          explosionSound.play();
+        }
         bullets.splice(i, 1);
         break;
       }
@@ -263,7 +324,7 @@ function collisionDetection() {
   }
 }
 
-// Comprueba colisiones entre los proyectiles enemigos y la nave del jugador
+/* Comprueba colisiones entre proyectiles enemigos y la nave del jugador */
 function checkEnemyBulletCollision() {
   for (let i = enemyBullets.length - 1; i >= 0; i--) {
     if (
@@ -273,13 +334,11 @@ function checkEnemyBulletCollision() {
       enemyBullets[i].y + enemyBullets[i].height > spaceship.y
     ) {
       enemyBullets.splice(i, 1);
-      // Reducir energía en 20
       spaceship.energy -= 20;
       explosionSound.currentTime = 0;
       explosionSound.play();
       spaceship.exploding = true;
       spaceship.explosionTimer = 15;
-      // Si la energía se agota, se pierde una vida y se reinicia el medidor
       if (spaceship.energy <= 0) {
         lives--;
         spaceship.energy = 100;
@@ -288,18 +347,18 @@ function checkEnemyBulletCollision() {
   }
 }
 
-// Comprueba condición de fin de juego: si se quedan sin vidas o si un enemigo alcanza la nave
+/* Comprueba condición de fin de juego */
 function checkGameOver() {
   if (lives <= 0) return true;
-  for (let alien of aliens) {
-    if (alien.y + alien.height >= spaceship.y) {
+  for (let enemy of aliens) {
+    if (enemy.y + enemy.height >= spaceship.y) {
       return true;
     }
   }
   return false;
 }
 
-// Dibuja el HUD: nivel, score, vidas y medidor de energía
+/* Dibuja el HUD refinado: nivel, score, vidas y medidor de energía */
 function drawHUD() {
   ctx.save();
   ctx.fillStyle = "cyan";
@@ -307,7 +366,7 @@ function drawHUD() {
   ctx.fillText("Nivel: " + level, 10, 30);
   ctx.fillText("Score: " + score, 10, 60);
   
-  // Dibujar vidas en la esquina superior derecha
+  // Vidas
   const heartWidth = 20;
   const heartHeight = 20;
   const spacing = 5;
@@ -315,7 +374,7 @@ function drawHUD() {
     ctx.drawImage(heartImg, canvas.width - (heartWidth + spacing) * (i + 1), 10, heartWidth, heartHeight);
   }
   
-  // Dibujar medidor de energía debajo del puntaje
+  // Medidor de energía (escudo)
   const barX = 10, barY = 80, barWidth = 150, barHeight = 15;
   ctx.strokeStyle = "cyan";
   ctx.lineWidth = 2;
@@ -327,7 +386,7 @@ function drawHUD() {
   ctx.restore();
 }
 
-// Dibuja un overlay de pausa
+/* Dibuja overlay de pausa */
 function drawPauseOverlay() {
   ctx.save();
   ctx.fillStyle = "rgba(0,0,0,0.5)";
@@ -338,11 +397,11 @@ function drawPauseOverlay() {
   ctx.restore();
 }
 
-// Bucle principal del juego
+/* Bucle principal del juego */
 function update() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   
-  // Upgrade desbloqueable: al alcanzar 100 puntos, cambiar skin
+  // Upgrade desbloqueable: al alcanzar 1000 puntos, cambiar skin (ya implementado)
   if (score >= 1000 && !unlockedUpgrade) {
     spaceshipImg.src = "nave_upgraded.png";
     unlockedUpgrade = true;
@@ -362,20 +421,32 @@ function update() {
     moveAliens();
     collisionDetection();
     
-    // Disparo enemigo: a partir del nivel 2
+    // Disparo enemigo: a partir del nivel 2, con comportamiento especial para enemigos "burst"
     if (level >= 2 && aliens.length > 0) {
       enemyShootTimer++;
       if (enemyShootTimer >= enemyShootInterval) {
         enemyShootTimer = 0;
-        const potenciales = aliens.filter(alien => !alien.exploding);
+        const potenciales = aliens.filter(enemy => !enemy.exploding);
         if (potenciales.length > 0) {
           const shooter = potenciales[Math.floor(Math.random() * potenciales.length)];
-          enemyBullets.push({
-            x: shooter.x + shooter.width / 2 - enemyBulletWidth / 2,
-            y: shooter.y + shooter.height,
-            width: enemyBulletWidth,
-            height: enemyBulletHeight
-          });
+          // Si el enemigo es de tipo "burst", dispara en ráfaga (3 balas)
+          if (shooter.type === "burst") {
+            for (let i = -1; i <= 1; i++) {
+              enemyBullets.push({
+                x: shooter.x + shooter.width / 2 - enemyBulletWidth / 2 + i * 5,
+                y: shooter.y + shooter.height,
+                width: enemyBulletWidth,
+                height: enemyBulletHeight
+              });
+            }
+          } else {
+            enemyBullets.push({
+              x: shooter.x + shooter.width / 2 - enemyBulletWidth / 2,
+              y: shooter.y + shooter.height,
+              width: enemyBulletWidth,
+              height: enemyBulletHeight
+            });
+          }
         }
       }
     }
@@ -412,8 +483,10 @@ function update() {
     return;
   }
   
+  // Si se han eliminado todos los enemigos, pasar al siguiente nivel
   if (aliens.length === 0) {
-    if (level === 5) {
+    if (level % 5 === 0) {
+      // Si es un nivel de jefe, se considera victoria del nivel (se pueden ajustar condiciones)
       victoryFlag = true;
       showEndScreen("¡VICTORIA!");
       return;
@@ -425,7 +498,7 @@ function update() {
   requestAnimationFrame(update);
 }
 
-// Función para mostrar el overlay final de partida
+// Mostrar overlay final de partida
 function showEndScreen(message) {
   const endScreen = document.getElementById("endScreen");
   const endMessage = document.getElementById("endMessage");
@@ -433,7 +506,7 @@ function showEndScreen(message) {
   endScreen.classList.remove("hidden");
 }
 
-// Manejo de eventos del teclado para controlar la nave y disparar
+// Manejo de eventos del teclado para controlar la nave
 function keyDown(e) {
   if (e.key === "ArrowRight" || e.key === "d") {
     spaceship.dx = spaceship.speed;
@@ -460,7 +533,7 @@ function keyUp(e) {
 document.addEventListener("keydown", keyDown);
 document.addEventListener("keyup", keyUp);
 
-// Funciones para controles táctiles (dispositivos móviles)
+// Controles táctiles para dispositivos móviles
 function setupTouchControls() {
   const touchLeft = document.getElementById("touchLeft");
   const touchRight = document.getElementById("touchRight");
@@ -506,7 +579,7 @@ function togglePause() {
   }
 }
 
-// Inicializar la cuadrícula de enemigos, controles táctiles y comenzar el juego
+// Inicializar enemigos, controles táctiles y comenzar el juego
 createAliens();
 setupTouchControls();
 update();

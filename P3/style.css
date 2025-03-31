@@ -326,3 +326,94 @@ body#lobby {
   background-size: cover;
   animation: none; /* Desactiva la animación del gradiente para el lobby */
 }
+
+
+/* Reglas para el acordeón */
+.accordion .accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.accordion .accordion-item.active .accordion-content {
+  max-height: 500px; /* Valor suficientemente alto para el contenido */
+  opacity: 1;
+  padding-top: 10px;
+}
+
+/* Estilos para el header de reglas */
+.rules-header {
+  width: 100%;
+  padding: 20px;
+  background: linear-gradient(-45deg, var(--bg-gradient-start), var(--bg-gradient-middle), var(--bg-gradient-end), #3a3a3a);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+.rules-header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  color: var(--primary-color);
+}
+.rules-nav {
+  margin-top: 10px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+.rules-nav .home-btn,
+.rules-nav .toggle-details-btn {
+  background: #121212;
+  color: #f7f7f7;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 1rem;
+  box-shadow: #ffffff 0 0 10px;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+.rules-nav .home-btn:hover,
+.rules-nav .toggle-details-btn:hover {
+  background: #f7f7f7;
+  color: #121212;
+  transform: scale(1.05);
+  box-shadow: #f7f7f7 0 0 10px;
+}
+
+/* Estilos para el contenedor principal */
+.rules-container {
+  width: 90%;
+  max-width: 800px;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Estilos para las tarjetas (cards) */
+.card {
+  background: rgba(30, 30, 30, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgb(255, 255, 255);
+  transition: transform 0.3s ease;
+  border-radius: 50px;
+}
+.card:hover {
+  transform: scale(1.02);
+}
+
+/* Footer para reglas */
+.rules-footer {
+  margin-top: 20px;
+  padding: 10px;
+  text-align: center;
+  background: var(--bg-gradient-end);
+  width: 100%;
+  color: var(--text-color);
+  font-size: 0.9rem;
+}
