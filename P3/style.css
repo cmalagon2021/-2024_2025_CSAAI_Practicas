@@ -50,7 +50,7 @@ body {
   text-align: center;
   max-width: 90%;
   margin: 20px;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 20px rgb(255, 255, 255);
   overflow: hidden; /* para que el destello no se salga */
 }
 
@@ -315,4 +315,14 @@ canvas {
 
 .skin-option.selected {
   border: 2px solid var(--primary-color);
+  background: linear-gradient(-45deg, var(--bg-gradient-start), var(--bg-gradient-middle), var(--bg-gradient-end), #afafaf);
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+}
+
+
+
+body#lobby {
+  background: url('espacio.gif') no-repeat center center fixed;
+  background-size: cover;
+  animation: none; /* Desactiva la animación del gradiente para el lobby */
 }
