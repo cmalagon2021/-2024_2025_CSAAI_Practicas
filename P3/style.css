@@ -20,8 +20,7 @@
 /* Fondo animado con un degradado sofisticado */
 body {
   margin: 0;
-  background: linear-gradient(-45deg, var(--bg-gradient-start), var(--bg-gradient-middle), var(--bg-gradient-end), #3a3a3a);
-  background-size: 400% 400%;
+background: #121212;  background-size: 400% 400%;
   animation: gradientAnimation 20s ease infinite;
   overflow-x: hidden;
   font-family: 'Orbitron', sans-serif;
@@ -43,8 +42,8 @@ body {
 /* Estilos metalizados para el lobby */
 .lobby {
   position: relative; /* necesario para el pseudo-elemento */
-  background: #3d3d3d;
-  background: linear-gradient(135deg, #4a4a4a, #2e2e2e, #4a4a4a);
+  background: #121212;
+  background: linear-gradient(135deg, #121212, #2e2e2e, #242424);
   border-radius: 10px;
   padding: 20px;
   text-align: center;
