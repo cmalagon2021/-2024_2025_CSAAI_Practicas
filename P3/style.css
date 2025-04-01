@@ -455,7 +455,8 @@ canvas {
 .home-btn:hover {
   color: #121212;
   background-color: #f7f7f7;
-  box-shadow: 0 4px 4px rgba(255, 253, 253, 0.8);
+  box-shadow: 0 4px 4px rgb(255, 253, 253);
+  transform: translateY(-2px);
 }
 
 /* Configuración del icono de Google Fonts */
