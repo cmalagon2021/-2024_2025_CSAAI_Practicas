@@ -226,7 +226,7 @@ header h1 {
 .card-frame {
   background: linear-gradient(135deg, #f7f7f7, #121212);
   border: 2px solid #ccc;
-  border-radius: 15px;
+  border-radius: 25px;
   padding: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   transition: transform 0.6s, box-shadow 0.6s;
@@ -235,7 +235,7 @@ header h1 {
 }
 
 .pokemon-card:hover .card-frame {
-  transform: scale(1.05) rotateY(15deg) rotate3d(1, 1, 1, 10deg);
+  transform: scale(1.5) rotateY(15deg) rotate3d(1, 1, 1, 365deg) ;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
 }
 
@@ -514,3 +514,5 @@ body#lobby {
   background-size: cover;
   animation: none; /* Desactiva la animación del gradiente para el lobby */
 }
+
+
