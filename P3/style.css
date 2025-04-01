@@ -44,12 +44,12 @@ background: #121212;  background-size: 400% 400%;
   position: relative; /* necesario para el pseudo-elemento */
   background: #121212;
   background: linear-gradient(135deg, #121212, #2e2e2e, #242424);
-  border-radius: 10px;
-  padding: 20px;
+  border-radius: 1000px;
+  padding: 100px;
   text-align: center;
   max-width: 90%;
   margin: 20px;
-  box-shadow: 0 0 20px rgb(255, 255, 255);
+  box-shadow: 0 0 50px rgb(255, 255, 255);
   overflow: hidden; /* para que el destello no se salga */
 }
 
@@ -111,219 +111,6 @@ header {
 header h1 {
   font-size: 2.5rem;
   text-shadow: 2px 2px 4px #000;
-}
-
-/* Contenedor principal del juego */
-.game-container {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 90%;
-  max-width: 600px;
-  margin-bottom: 20px;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 0 30px var(--primary-color);
-}
-
-/* Estilos para el canvas del juego */
-canvas {
-  background: #000;
-  border: 3px solid var(--primary-color);
-  box-shadow: 0 0 30px var(--primary-color);
-  animation: pulse 2s infinite;
-  width: 100%;
-  height: auto;
-}
-@keyframes pulse {
-  0% { box-shadow: 0 0 20px var(--primary-color); }
-  50% { box-shadow: 0 0 40px var(--primary-color); }
-  100% { box-shadow: 0 0 20px var(--primary-color); }
-}
-
-/* Estilos para overlays (pausa y fin de partida) */
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: var(--overlay-bg);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10;
-}
-.overlay-content {
-  text-align: center;
-}
-.overlay-content h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: var(--primary-color);
-}
-.overlay-buttons {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-}
-.overlay-buttons button {
-  font-size: 1rem;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  background-color: var(--primary-color);
-  color: #000;
-  cursor: pointer;
-  box-shadow: 0 0 10px var(--primary-color);
-  transition: background-color 0.3s, transform 0.3s;
-}
-.overlay-buttons button:hover {
-  background-color: var(--primary-hover);
-  transform: scale(1.05);
-}
-
-/* Clase para ocultar elementos */
-.hidden {
-  display: none;
-}
-
-/* Estilos para controles táctiles, ubicados fuera del canvas */
-.touch-controls {
-  width: 90%;
-  max-width: 600px;
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 20px;
-}
-.touch-controls button {
-  font-size: 1.5rem;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  background-color: rgba(255, 255, 255, 0.7);
-  color: #000;
-  box-shadow: 0 0 10px var(--primary-color);
-}
-
-/* Mostrar controles táctiles solo en móviles */
-@media (min-width: 768px) {
-  .touch-controls {
-    display: none;
-  }
-}
-
-
-
-
-/* Botón general */
-.btn {
-  display: inline-block;
-  padding: 12px 24px;
-  margin: 10px;
-  text-decoration: none;
-  font-weight: 500;
-  color: #fff;
-  background-color: #333;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 2px 4px rgba(219, 219, 219, 0.3);
-}
-
-.btn:hover {
-  background-color: #a30000;
-  transform: translateY(-2px);
-}
-
-/* Contenedor para agrupar y centrar botones */
-.button-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-top: 20px;
-}
-
-/* Botón redondo (home y play) */
-.home-btn {
-  width: 50px;
-  height: 50px;
-  background-color: #333;
-  color: #f7f7f7;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
-  transition: background-color 0.3s ease;
-  z-index: 1100;
-}
-
-.home-btn:hover {
-  color: #333;
-  background-color: #f7f7f7;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.8);
-}
-
-/* Configuración del icono de Google Fonts */
-.material-symbols-outlined {
-  font-variation-settings:
-    'FILL' 0,
-    'wght' 400,
-    'GRAD' 0,
-    'opsz' 24;
-}
-
-
-/* Estilos para el selector de skin */
-.skin-selector {
-  margin: 20px 0;
-  text-align: center;
-}
-
-.skin-selector p {
-  margin-bottom: 10px;
-  font-size: 1.2rem;
-  color: var(--primary-color);
-}
-
-.skin-options {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.skin-option {
-  width: 80px;
-  height: auto;
-  border: 2px solid transparent;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: border 0.3s;
-}
-
-.skin-option:hover {
-  border: 2px solid var(--primary-color);
-}
-
-.skin-option.selected {
-  border: 2px solid var(--primary-color);
-  background: linear-gradient(-45deg, var(--bg-gradient-start), var(--bg-gradient-middle), var(--bg-gradient-end), #afafaf);
-  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
-}
-
-
-
-body#lobby {
-  background: url('espacio.gif') no-repeat center center fixed;
-  background-size: cover;
-  animation: none; /* Desactiva la animación del gradiente para el lobby */
 }
 
 
@@ -416,3 +203,313 @@ body#lobby {
   color: var(--text-color);
   font-size: 0.9rem;
 }
+
+
+/* Estilos para el catálogo de cartas estilo Pokémon */
+.card-catalog {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.pokemon-card {
+  width: 200px;
+  perspective: 1000px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.card-frame {
+  background: linear-gradient(135deg, #f7f7f7, #121212);
+  border: 2px solid #ccc;
+  border-radius: 15px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  transition: transform 0.6s, box-shadow 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.pokemon-card:hover .card-frame {
+  transform: scale(1.05) rotateY(15deg) rotate3d(1, 1, 1, 10deg);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+}
+
+.card-header {
+  background: linear-gradient(135deg, #333, #121212);
+  color: #f7f7f7;
+  padding: 5px;
+  border-top-left-radius: 13px;
+  border-top-right-radius: 13px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.card-image {
+  padding: 10px;
+  background: linear-gradient(135deg, #121212, #f7f7f7, #333);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-image img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.card-footer {
+  background: #121212;
+  color: #f7f7f7;
+  padding: 5px;
+  border-bottom-left-radius: 13px;
+  border-bottom-right-radius: 13px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.pokemon-card.selected .card-frame {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 30px var(--primary-color);
+  background: linear-gradient(135deg, #a30000, #f7f7f7, #121212, #580000, #afafaf);
+}
+
+/* Estilos adicionales para encabezado y pie en naves.html */
+.naves-header {
+  text-align: center;
+  margin-top: 20px;
+  color: var(--primary-color);
+}
+.naves-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+.naves-container {
+  width: 90%;
+  max-width: 800px;
+  margin: 20px auto;
+  text-align: center;
+}
+.naves-footer {
+  text-align: center;
+  margin: 20px;
+}
+
+/* Contenedor principal del juego */
+.game-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  max-width: 600px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 30px var(--primary-color);
+}
+
+/* Estilos para el canvas del juego */
+canvas {
+  background: #000;
+  border: 3px solid var(--primary-color);
+  box-shadow: 0 0 30px var(--primary-color);
+  animation: pulse 2s infinite;
+  width: 100%;
+  height: auto;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 20px var(--primary-color); }
+  50% { box-shadow: 0 0 40px var(--primary-color); }
+  100% { box-shadow: 0 0 20px var(--primary-color); }
+}
+
+/* Estilos para overlays (pausa y fin de partida) */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--overlay-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+.overlay-content {
+  text-align: center;
+}
+.overlay-content h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: var(--primary-color);
+}
+.overlay-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+.overlay-buttons button {
+  font-size: 1rem;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 50px;
+  background-color: var(--primary-color);
+  color: #000;
+  cursor: pointer;
+  box-shadow: 0 0 10px var(--primary-color);
+  transition: background-color 0.3s, transform 0.3s;
+}
+.overlay-buttons button:hover {
+  background-color: var(--primary-hover);
+  transform: scale(1.05);
+  color: #f7f7f7;
+}
+
+/* Clase para ocultar elementos */
+.hidden {
+  display: none;
+}
+
+/* Estilos para controles táctiles, ubicados fuera del canvas */
+.touch-controls {
+  width: 90%;
+  max-width: 600px;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+.touch-controls button {
+  font-size: 1.5rem;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 50px;
+  background-color: rgb(255, 255, 255);
+  color: #000;
+  box-shadow: 0 0 10px var(--primary-color);
+}
+
+/* Mostrar controles táctiles solo en móviles */
+@media (min-width: 768px) {
+  .touch-controls {
+    display: none;
+  }
+}
+
+
+
+
+/* Botón general */
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  margin: 10px;
+  text-decoration: none;
+  font-weight: 500;
+  color: #fff;
+  background-color: #333;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 4px rgba(219, 219, 219, 0.3);
+}
+
+.btn:hover {
+  background-color: #a30000;
+  transform: translateY(-2px);
+}
+
+/* Contenedor para agrupar y centrar botones */
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+/* Botón redondo (home y play) */
+.home-btn {
+  width: 50px;
+  height: 50px;
+  background-color: #121212;
+  color: #f7f7f7;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
+  transition: background-color 0.3s ease;
+  z-index: 1100;
+}
+
+.home-btn:hover {
+  color: #333;
+  background-color: #f7f7f7;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}
+
+/* Configuración del icono de Google Fonts */
+.material-symbols-outlined {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+}
+
+
+/* Estilos para el selector de skin */
+.skin-selector {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.skin-selector p {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  color: var(--primary-color);
+}
+
+.skin-options {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.skin-option {
+  width: 80px;
+  height: auto;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: border 0.3s;
+}
+
+.skin-option:hover {
+  border: 2px solid var(--primary-color);
+}
+
+.skin-option.selected {
+  border: 2px solid var(--primary-color);
+  background: linear-gradient(-45deg, var(--bg-gradient-start), var(--bg-gradient-middle), var(--bg-gradient-end), #afafaf);
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+}
+
+
+
+body#lobby {
+  background: url('espacio.gif') no-repeat center center fixed;
+  background-size: cover;
+  animation: none; /* Desactiva la animación del gradiente para el lobby */
+}
+
+

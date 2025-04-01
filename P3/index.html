@@ -4,55 +4,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Invasión Alienígena - Lobby</title>
-  <!-- Importamos la fuente Orbitron -->
+  <!-- Importamos la fuente Orbitron y Material Symbols -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" />
 </head>
-<body >
+<body>
   <div class="lobby">
     <h1>Invasión Alienígena</h1>
-    
-    <!-- Sección de selección de skin -->
-    <div class="skin-selector">
-      <p>Elige tu nave:</p>
-      <div class="skin-options">
-        <img src="nave_buena1.png" alt="Skin 1" class="skin-option" data-skin="nave_buena1.png">
-        <img src="nave_buena2.png" alt="Skin 2" class="skin-option" data-skin="nave_buena2.png">
-        <img src="nave_buena3.png" alt="Skin 3" class="skin-option" data-skin="nave_buena3.png">
-      </div>
-    </div>
-    
+    <p>Bienvenido comandante. Prepárate para defender la Tierra.</p>
     <div class="button-container">
+      <!-- Botón para volver al repositorio (home) colocado en el centro -->
       <a href="https://cmalagon2021.github.io/-2024_2025_CSAAI_Practicas" class="home-btn">
         <span class="material-symbols-outlined">home</span>
       </a>
-      <!-- El enlace a juego.html inicia el juego -->
-      <a class="home-btn" href="juego.html">
-        <span class="material-symbols-outlined">play_arrow</span>
+      <!-- Botón para ir a la selección de naves -->
+      <a class="home-btn" href="naves.html">
+        <span class="material-symbols-outlined">dashboard</span>
       </a>
+      <!-- Botón para jugar -->
+      <button class="home-btn" id="play-btn" onclick="window.location.href='juego.html'">
+        <span class="material-symbols-outlined">play_arrow</span>
+      </button>
+      <!-- Botón para ver las reglas/historia -->
       <button class="home-btn" id="rules-btn" onclick="window.location.href='reglas.html'">
         <span class="material-symbols-outlined">info</span>
       </button>
-      
     </div>
   </div>
-
-  <script>
-    // Configurar la selección de skin
-    document.addEventListener("DOMContentLoaded", function() {
-      const skinOptions = document.querySelectorAll(".skin-option");
-      skinOptions.forEach(img => {
-        img.addEventListener("click", function() {
-          // Remover clase 'selected' de todas
-          skinOptions.forEach(i => i.classList.remove("selected"));
-          // Agregar clase 'selected' a la imagen clickeada
-          this.classList.add("selected");
-          // Guardar la skin elegida en localStorage
-          localStorage.setItem("selectedSkin", this.getAttribute("data-skin"));
-        });
-      });
-    });
-  </script>
 </body>
 </html>
