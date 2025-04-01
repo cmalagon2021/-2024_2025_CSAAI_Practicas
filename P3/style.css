@@ -51,6 +51,7 @@ background: #121212;  background-size: 400% 400%;
   margin: 20px;
   box-shadow: 0 0 50px rgb(255, 255, 255);
   overflow: hidden; /* para que el destello no se salga */
+  
 }
 
 /* Pseudo-elemento para el destello metalizado */
@@ -78,6 +79,7 @@ background: #121212;  background-size: 400% 400%;
   font-size: 2.5rem;
   margin-bottom: 1rem;
   color: var(--primary-color);
+  
 }
 .lobby p {
   font-size: 1.2rem;
@@ -451,9 +453,9 @@ canvas {
 }
 
 .home-btn:hover {
-  color: #333;
+  color: #121212;
   background-color: #f7f7f7;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.8);
+  box-shadow: 0 4px 4px rgba(255, 253, 253, 0.8);
 }
 
 /* Configuración del icono de Google Fonts */
@@ -511,5 +513,3 @@ body#lobby {
   background-size: cover;
   animation: none; /* Desactiva la animación del gradiente para el lobby */
 }
-
-
