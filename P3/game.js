@@ -107,6 +107,7 @@ function createEnemy(x, y, type) {
     height: props.height,
     type: type,
     hitPoints: props.hitPoints,
+    maxHitPoints: props.hitPoints,  // Valor máximo de vida para el boss (y otros enemigos)
     speedMultiplier: props.speedMultiplier,
     burst: props.burst || false,
     exploding: false,
@@ -119,7 +120,6 @@ function createAliens() {
   aliens = [];
   // Si el nivel es múltiplo de 5, se crea un jefe
   if (level % 5 === 0) {
-    // Posicionar al jefe centrado en la parte superior
     const bossProps = getEnemyProperties("boss");
     const boss = {
       x: canvas.width / 2 - bossProps.width / 2,
@@ -128,20 +128,18 @@ function createAliens() {
       height: bossProps.height,
       type: "boss",
       hitPoints: bossProps.hitPoints,
+      maxHitPoints: bossProps.hitPoints,
       speedMultiplier: bossProps.speedMultiplier,
       exploding: false,
-      explosionTimer: 0,
-      
+      explosionTimer: 0
     };
     aliens.push(boss);
   } else {
-    // Crear una cuadrícula de enemigos con tipos aleatorios
     const rows = Math.min(3 + level, 6);
     for (let row = 0; row < rows; row++) {
       for (let col = 0; col < alienCols; col++) {
         const x = alienOffsetLeft + col * (30 + alienPadding);
         const y = alienOffsetTop + row * (30 + alienPadding);
-        // Asignar tipo aleatorio: 50% normal, 20% fast, 20% resistant, 10% burst
         const rand = Math.random();
         let type = "normal";
         if (rand < 0.1) {
@@ -162,7 +160,7 @@ function nextLevel() {
   level++;
   alienSpeed = baseAlienSpeed + (level - 1) * 0.5;
   createAliens();
-  enemyShootTimer = 0; // Reiniciar temporizador
+  enemyShootTimer = 0;
 }
 
 /* SISTEMA DE SCORE POPUPS */
@@ -197,6 +195,32 @@ function drawScorePopups() {
     ctx.restore();
   });
 }
+
+/* Función para dibujar la barra de vida del boss */
+function drawBossLifeBar() {
+  // Buscar un enemigo de tipo "boss" que aún no esté explotando
+  const boss = aliens.find(enemy => enemy.type === "boss" && !enemy.exploding);
+  if (boss) {
+    const barWidth = 300;
+    const barHeight = 20;
+    // Posicionar la barra en el centro, a 10px del borde inferior
+    const x = (canvas.width - barWidth) / 2;
+    const y = canvas.height - barHeight - 10;
+    ctx.strokeStyle = "red";
+    ctx.lineWidth = 3;
+    ctx.strokeRect(x, y, barWidth, barHeight);
+    // Rellenar la barra en función de la vida restante
+    const fillWidth = (boss.hitPoints / boss.maxHitPoints) * barWidth;
+    ctx.fillStyle = "green";
+    ctx.fillRect(x, y, fillWidth, barHeight);
+    // Dibujar el texto de la vida del boss encima de la barra
+    ctx.fillStyle = "white";
+    ctx.font = "16px Orbitron, sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText("Boss HP: " + boss.hitPoints + " / " + boss.maxHitPoints, canvas.width / 2, y + barHeight - 3);
+  }
+}
+
 
 /* Dibuja la nave del jugador */
 function drawSpaceship() {
@@ -296,8 +320,7 @@ function moveEnemyBullets() {
   }
 }
 
-/* Comprueba colisiones entre las balas del jugador y los enemigos.
-   Si el enemigo es resistente, se reduce su hitPoints. */
+/* Comprueba colisiones entre las balas del jugador y los enemigos */
 function collisionDetection() {
   for (let i = bullets.length - 1; i >= 0; i--) {
     for (let j = aliens.length - 1; j >= 0; j--) {
@@ -307,7 +330,6 @@ function collisionDetection() {
           bullets[i].x + bulletWidth > enemy.x &&
           bullets[i].y < enemy.y + enemy.height &&
           bullets[i].y + bulletHeight > enemy.y) {
-        // Reducir hitPoints si es resistente o jefe
         enemy.hitPoints--;
         if (enemy.hitPoints <= 0) {
           enemy.exploding = true;
@@ -358,23 +380,19 @@ function checkGameOver() {
   return false;
 }
 
-/* Dibuja el HUD refinado: nivel, score, vidas y medidor de energía */
+/* Dibuja el HUD: nivel, score, vidas y medidor de energía */
 function drawHUD() {
   ctx.save();
   ctx.fillStyle = "cyan";
   ctx.font = "20px Orbitron, sans-serif";
-  ctx.fillText("Nivel: " + level, 10, 30);
-  ctx.fillText("Score: " + score, 10, 60);
-  
-  // Vidas
+  ctx.fillText("Lv: " + level, 50, 30);
+  ctx.fillText("Sc: " + score, 50, 60);
   const heartWidth = 20;
   const heartHeight = 20;
   const spacing = 5;
   for (let i = 0; i < lives; i++) {
     ctx.drawImage(heartImg, canvas.width - (heartWidth + spacing) * (i + 1), 10, heartWidth, heartHeight);
   }
-  
-  // Medidor de energía (escudo)
   const barX = 10, barY = 80, barWidth = 150, barHeight = 15;
   ctx.strokeStyle = "cyan";
   ctx.lineWidth = 2;
@@ -382,8 +400,28 @@ function drawHUD() {
   ctx.fillStyle = "cyan";
   const energyWidth = (spaceship.energy / 100) * barWidth;
   ctx.fillRect(barX, barY, energyWidth, barHeight);
-  
   ctx.restore();
+}
+
+/* Dibuja la barra de vida del boss */
+function drawBossLifeBar() {
+  const boss = aliens.find(enemy => enemy.type === "boss" && !enemy.exploding);
+  if (boss) {
+    const barWidth = 300;
+    const barHeight = 20; 
+    const x = (canvas.width - barWidth) / 2;
+    const y = 10;
+    ctx.strokeStyle = "red";
+    ctx.lineWidth = 3;
+    ctx.strokeRect(x, y, barWidth, barHeight);
+    const fillWidth = (boss.hitPoints / boss.maxHitPoints) * barWidth;
+    ctx.fillStyle = "green";
+    ctx.fillRect(x, y, fillWidth, barHeight);
+    ctx.fillStyle = "white";
+    ctx.font = "16px Orbitron, sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText("Boss HP: " + boss.hitPoints + " / " + boss.maxHitPoints, canvas.width / 2, y + barHeight - 3);
+  }
 }
 
 /* Dibuja overlay de pausa */
@@ -401,7 +439,6 @@ function drawPauseOverlay() {
 function update() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   
-  // Upgrade desbloqueable: al alcanzar 1000 puntos, cambiar skin (ya implementado)
   if (score >= 1000 && !unlockedUpgrade) {
     spaceshipImg.src = "nave_upgraded.png";
     unlockedUpgrade = true;
@@ -420,8 +457,6 @@ function update() {
     moveBullets();
     moveAliens();
     collisionDetection();
-    
-    // Disparo enemigo: a partir del nivel 2, con comportamiento especial para enemigos "burst"
     if (level >= 2 && aliens.length > 0) {
       enemyShootTimer++;
       if (enemyShootTimer >= enemyShootInterval) {
@@ -429,7 +464,6 @@ function update() {
         const potenciales = aliens.filter(enemy => !enemy.exploding);
         if (potenciales.length > 0) {
           const shooter = potenciales[Math.floor(Math.random() * potenciales.length)];
-          // Si el enemigo es de tipo "burst", dispara en ráfaga (3 balas)
           if (shooter.type === "burst") {
             for (let i = -1; i <= 1; i++) {
               enemyBullets.push({
@@ -455,7 +489,6 @@ function update() {
     checkEnemyBulletCollision();
   }
   
-  // Actualizar timer de explosión en enemigos
   for (let i = aliens.length - 1; i >= 0; i--) {
     if (aliens[i].exploding) {
       aliens[i].explosionTimer--;
@@ -470,6 +503,7 @@ function update() {
   drawEnemyBullets();
   drawAliens();
   drawHUD();
+  drawBossLifeBar(); // Dibujar la barra de vida del boss, si existe
   updateScorePopups();
   drawScorePopups();
   
@@ -483,10 +517,8 @@ function update() {
     return;
   }
   
-  // Si se han eliminado todos los enemigos, pasar al siguiente nivel
   if (aliens.length === 0) {
     if (level % 5 === 0) {
-      // Si es un nivel de jefe, se considera victoria del nivel (se pueden ajustar condiciones)
       victoryFlag = true;
       showEndScreen("¡VICTORIA!");
       return;
@@ -533,7 +565,6 @@ function keyUp(e) {
 document.addEventListener("keydown", keyDown);
 document.addEventListener("keyup", keyUp);
 
-// Controles táctiles para dispositivos móviles
 function setupTouchControls() {
   const touchLeft = document.getElementById("touchLeft");
   const touchRight = document.getElementById("touchRight");
@@ -568,7 +599,6 @@ function setupTouchControls() {
   });
 }
 
-// Función para alternar pausa
 function togglePause() {
   paused = !paused;
   const pauseScreen = document.getElementById("pauseScreen");
@@ -579,7 +609,6 @@ function togglePause() {
   }
 }
 
-// Inicializar enemigos, controles táctiles y comenzar el juego
 createAliens();
 setupTouchControls();
 update();
