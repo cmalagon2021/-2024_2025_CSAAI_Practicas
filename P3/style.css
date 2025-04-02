@@ -16,6 +16,15 @@
 * {
   box-sizing: border-box;
 }
+/* Animaciones de transición para todas las pantallas */
+.fade-in {
+  animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
 
 /* Fondo animado con un degradado sofisticado */
 body {
@@ -92,7 +101,7 @@ background: #121212;  background-size: 400% 400%;
   border: none;
   border-radius: 5px;
   background-color: var(--primary-color);
-  color: #000;
+  color: #121212;
   cursor: pointer;
   transition: transform 0.3s;
   box-shadow: 0 0 10px #121212;
@@ -217,28 +226,54 @@ header h1 {
 }
 
 .pokemon-card {
-  width: 200px;
+  width: 220px;
   perspective: 1000px;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: transform 0.4s ease;
 }
 
 .card-frame {
-  background: linear-gradient(135deg, #f7f7f7, #121212);
-  border: 2px solid #ccc;
+  background: linear-gradient(145deg, #e6e6e6, #1a1a1a, #b0b0b0, #2e2e2e);
+  border: 2px solid #f7f7f7;
   border-radius: 25px;
-  padding: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-  transition: transform 0.6s, box-shadow 0.6s;
-  transform-style: preserve-3d;
+  padding: 12px;
+  box-shadow: 
+    0 0 25px rgba(0, 0, 0, 0.6),
+    0 0 40px rgba(20, 20, 20, 0.3),
+    inset 0 0 20px rgba(0, 0, 0, 0.3);
   position: relative;
+  overflow: hidden;
+  transition: transform 0.6s, box-shadow 0.6s;
 }
 
 .pokemon-card:hover .card-frame {
-  transform: scale(1.2) rotateY(15deg) rotate3d(1, 1, 1, 365deg) ;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
-
+  transform: scale(1.15) rotateY(10deg) rotate3d(1, 1, 1, 365deg);
+  box-shadow: 
+    0 0 25px rgba(87, 87, 87, 0.6),
+    0 0 40px rgba(20, 20, 20, 0.3),
+    inset 0 0 20px rgba(2, 2, 2, 0.3);
 }
+
+/* Brillo animado como destello */
+.card-frame::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
+  transform: skewX(-25deg);
+  animation: shine 3s infinite;
+  pointer-events: none;
+}
+
+/* Mantén o mejora esta animación existente */
+@keyframes shine {
+  0% { left: -75%; }
+  100% { left: 125%; }
+}
+
 
 .card-header {
   background: linear-gradient(135deg, #333, #121212);
@@ -257,6 +292,7 @@ header h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+  
 }
 
 .card-image img {
@@ -275,9 +311,11 @@ header h1 {
 }
 
 .pokemon-card.selected .card-frame {
+  
   border-color: var(--primary-color);
   box-shadow: 0 0 30px var(--primary-color);
   background: linear-gradient(135deg, #a30000, #f7f7f7, #121212, #580000, #afafaf);
+  transform: rotate3d(1, 1, 1, 10deg);
 }
 
 /* Estilos adicionales para encabezado y pie en naves.html */
@@ -515,5 +553,6 @@ body#lobby {
   background-size: cover;
   animation: none; /* Desactiva la animación del gradiente para el lobby */
 }
+
 
 
