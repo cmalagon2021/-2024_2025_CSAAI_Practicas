@@ -424,16 +424,40 @@ function drawBossLifeBar() {
   }
 }
 
-/* Dibuja overlay de pausa */
+// Dibuja overlay de pausa con rediseño estético futurista
 function drawPauseOverlay() {
   ctx.save();
-  ctx.fillStyle = "rgba(0,0,0,0.5)";
+
+  // Fondo oscuro con transparencia y ligero desenfoque simulado
+  ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = "white";
-  ctx.font = "40px Orbitron, sans-serif";
-  ctx.fillText("PAUSA", canvas.width / 2 - 70, canvas.height / 2);
+
+  // Círculo brillante detrás del texto (halo de energía)
+  const centerX = canvas.width / 2;
+  const centerY = canvas.height / 2;
+  const gradient = ctx.createRadialGradient(centerX, centerY, 10, centerX, centerY, 150);
+  gradient.addColorStop(0, 'rgba(0, 255, 255, 0.2)');
+  gradient.addColorStop(1, 'rgba(0, 255, 255, 0)');
+  ctx.fillStyle = gradient;
+  ctx.beginPath();
+  ctx.arc(centerX, centerY, 150, 0, 2 * Math.PI);
+  ctx.fill();
+
+  // Texto de pausa con sombra y borde luminoso
+  ctx.font = "48px Orbitron, sans-serif";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.shadowColor = "cyan";
+  ctx.shadowBlur = 20;
+  ctx.fillStyle = "#00ffff";
+  ctx.strokeStyle = "white";
+  ctx.lineWidth = 2;
+  ctx.strokeText("PAUSA", centerX, centerY);
+  ctx.fillText("PAUSA", centerX, centerY);
+
   ctx.restore();
 }
+
 
 /* Bucle principal del juego */
 function update() {
