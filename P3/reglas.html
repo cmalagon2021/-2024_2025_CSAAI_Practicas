@@ -83,7 +83,7 @@
   
   <!-- JavaScript para la interactividad del acordeón -->
   <script>
-    // Configurar cada encabezado para alternar la clase "active" en su contenedor
+    // Alterna la clase "active" al hacer clic en cada encabezado del acordeón
     document.querySelectorAll('.accordion-header').forEach(header => {
       header.addEventListener('click', () => {
         header.parentElement.classList.toggle('active');
@@ -95,6 +95,21 @@
       const accordionItems = document.querySelectorAll('.accordion-item');
       accordionItems.forEach(item => item.classList.toggle('active'));
       toggleDetailsBtn.textContent = toggleDetailsBtn.textContent === 'Mostrar detalles' ? 'Ocultar detalles' : 'Mostrar detalles';
+    });
+  </script>
+  
+  <!-- Script para aplicar efecto fade-in a las secciones al hacer scroll -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('.rules-container section');
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1 });
+      sections.forEach(section => observer.observe(section));
     });
   </script>
 </body>

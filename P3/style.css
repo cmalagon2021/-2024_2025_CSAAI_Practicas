@@ -634,4 +634,42 @@ button::before, .home-btn::before, .btn::before {
 }
 
 
+.card {
+  background: rgba(30, 30, 30, 0.9);
+  padding: 20px;
+  border-radius: 50px;
+  box-shadow: 0 0 20px var(--text-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 25px var(--primary-hover); /* Glow rojo sutil */
+}
+
+.accordion-header {
+  cursor: pointer;
+  padding: 10px;
+  background: linear-gradient(-45deg, var(--bg-gradient-start), var(--bg-gradient-middle));
+  transition: color 0.3s ease;
+}
+
+.accordion-item.active .accordion-header {
+  color: var(--primary-hover); /* En rojo al estar activo */
+  border-bottom: 2px solid var(--primary-hover);
+}
+
+
+.rules-container section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.rules-container section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
 
