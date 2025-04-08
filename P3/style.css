@@ -253,6 +253,7 @@ header h1 {
     0 0 40px rgba(255, 255, 255, 0.3),
     inset 20px 20px 20px rgba(255, 255, 255, 0.3);
     
+  
 }
 
 /* Brillo animado como destello */
@@ -349,20 +350,24 @@ header h1 {
   width: 90%;
   max-width: 600px;
   margin-bottom: 20px;
-  border-radius: 10px;
+  border-radius: 25px;
   overflow: hidden;
-  box-shadow: 0 0 30px var(--primary-color);
+  box-shadow: 0 0 50px var(--primary-color);
 }
 
 /* Estilos para el canvas del juego */
 canvas {
-  background: #000;
+  background: #201f1f;
   border: 3px solid var(--primary-color);
-  box-shadow: 0 0 30px var(--primary-color);
+  box-shadow:  0 0 30px var(--primary-color);
   animation: pulse 2s infinite;
+  border-radius: 25px;
   width: 100%;
   height: auto;
 }
+
+
+
 @keyframes pulse {
   0% { box-shadow: 0 0 20px var(--primary-color); }
   50% { box-shadow: 0 0 40px var(--primary-color); }
@@ -427,12 +432,12 @@ canvas {
 }
 .touch-controls button {
   font-size: 1.5rem;
-  padding: 10px 20px;
-  border: none;
+  padding: 15px 20px;
+  border: #121212 solid 3px;
   border-radius: 50px;
   background-color: rgb(255, 255, 255);
-  color: #000;
-  box-shadow: 0 0 10px var(--primary-color);
+  color: #121212;
+  box-shadow: 0 0 10px #000000;
 }
 
 /* Mostrar controles táctiles solo en móviles */
