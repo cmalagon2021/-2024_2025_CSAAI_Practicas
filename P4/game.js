@@ -137,6 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
         clearInterval(timerInterval);
         messageDisplay.textContent = `¡Felicidades! Has completado el juego en ${moves} movimientos y ${timer} segundos.`;
       }
+
     } else {
       lockBoard = true;
       setTimeout(() => {
