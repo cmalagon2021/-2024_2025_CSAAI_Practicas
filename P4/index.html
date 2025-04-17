@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Juego Memory</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Juego Memory</h1>
+  </header>
+
+  <div class="controls">
+    <select id="dimensionSelector">
+      <option value="2">2 x 2</option>
+      <option value="4" selected>4 x 4</option>
+      <option value="6">6 x 6</option>
+    </select>
+    <button id="startBtn">Comenzar</button>
+    <button id="resetBtn">Reiniciar</button>
+    <div class="stats">
+      <span id="moveCount">Movimientos: 0</span>
+      <span id="timer">Tiempo: 0 s</span>
+    </div>
+  </div>
+
+  <div id="gameBoard" class="game-board"></div>
+  <div id="message" class="message"></div>
+
+  <script src="game.js"></script>
+</body>
+</html>
