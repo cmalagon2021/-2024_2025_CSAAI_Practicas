@@ -1,11 +1,11 @@
 :root {
     --bg-gradient-start: #0b0c10;
     --bg-gradient-end:   #1f2833;
-    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-bg: rgba(255,255,255,0.05);
     --accent-color: #66fcf1;
-    --accent-glow: rgba(102, 252, 241, 0.5);
+    --accent-glow: rgba(102,252,241,0.5);
     --text-color: #c5c6c7;
-    --header-color: #67eee7;
+    --header-color: #6cfff8;
   }
   
   * {
@@ -22,39 +22,43 @@
     align-items: center;
     justify-content: center;
     min-height: 100vh;
+    padding: 16px;
   }
   
   .container {
     background: var(--glass-bg);
     backdrop-filter: blur(10px);
-    border-radius: 75px;
+    border-radius: 16px;
     padding: 24px;
-    max-width: 800px;
     width: 100%;
+    max-width: 800px;
     box-shadow: 0 0 20px var(--accent-glow);
   }
   
   header h1 {
     color: var(--header-color);
-    
     text-align: center;
-    font-size: 2.5rem;
+    font-size: 2rem;
     margin-bottom: 16px;
     text-shadow: 0 0 8px var(--accent-glow);
   }
   
   .controls {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: 12px;
     margin-bottom: 16px;
   }
   
   .btn {
+    flex: 1 1 45%;
+    min-width: 120px;
+    max-width: 200px;
     background: transparent;
     border: 2px solid var(--accent-color);
     border-radius: 30px;
-    padding: 10px 20px;
+    padding: 12px;
     font-size: 1rem;
     color: var(--accent-color);
     cursor: pointer;
@@ -62,7 +66,6 @@
     overflow: hidden;
     transition: color 0.3s;
     text-shadow: 0 0 4px var(--accent-glow);
-    box-shadow: 0 0 8px var(--accent-glow);
   }
   
   .btn::before {
@@ -78,8 +81,7 @@
   }
   
   .btn:hover {
-    color: #5fec96;
-    
+    color: #55e08a;
   }
   
   .btn:hover::before {
@@ -88,12 +90,15 @@
   
   .status {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     margin-bottom: 16px;
   }
   
   .status .info {
     font-size: 1.1rem;
+    flex: 1 1 45%;
+    text-align: center;
   }
   
   .status #message {
@@ -105,10 +110,17 @@
   }
   
   canvas {
-    display: block;
-    margin: 0 auto;
+    width: 100%;
+    height: auto;
     background: #1f2833;
     border: 2px solid var(--accent-color);
     box-shadow: 0 0 12px var(--accent-glow);
     border-radius: 75px;
+  }
+  
+  /* Ajustes en pantallas pequeñas */
+  @media (max-width: 480px) {
+    header h1 { font-size: 1.5rem; }
+    .btn { font-size: 0.9rem; padding: 10px; }
+    .status .info { font-size: 1rem; }
   }
