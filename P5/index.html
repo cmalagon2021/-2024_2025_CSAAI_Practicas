@@ -1,11 +1,10 @@
-<!-- index.html -->
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Práctica 5 – Simulación de Red</title>
-  <!-- Fuente futurista -->
+  <!-- Fuente Orbitron -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
   <script src="app.js" defer></script>
@@ -16,23 +15,35 @@
       <h1>Simulación de Red Aleatoria</h1>
     </header>
 
+    <!-- Leyenda ubicada debajo del título -->
+    <div class="legend">
+      <div><span class="dot normal"></span> Nodo</div>
+      <div><span class="dot highlight"></span> Ruta mínima</div>
+      <div><span class="line"></span> Arista</div>
+    </div>
+
     <section class="controls">
       <button id="generateBtn" class="btn">Generar red</button>
       <button id="calcBtn" class="btn">Calcular ruta</button>
+      <select id="themeSwitcher" class="select">
+        <option value="dark">Tema Oscuro</option>
+        <option value="light">Tema Claro</option>
+      </select>
+      <select id="paletteSwitcher" class="select">
+        <option value="#66fcf1">Cian</option>
+        <option value="#ff6ac1">Magenta</option>
+        <option value="#ffa500">Naranja</option>
+      </select>
     </section>
 
     <section class="status">
       <p id="message">Pulsa "Generar red" para empezar.</p>
-      <div class="info">
-        <span class="label">Nodos:</span> <span id="nodeCount">0</span>
-      </div>
-      <div class="info">
-        <span class="label">Tiempo total (retardo):</span> <span id="totalTime">0</span> ms
-      </div>
+      <div class="info"><span class="label">Nodos:</span> <span id="nodeCount">0</span></div>
+      <div class="info"><span class="label">Tiempo total:</span> <span id="totalTime">0</span> ms</div>
     </section>
 
-    <canvas id="networkCanvas" width="700" height="500"></canvas>
+    <canvas id="networkCanvas"></canvas>
+    <div id="tooltip" class="tooltip"></div>
   </div>
 </body>
 </html>
-

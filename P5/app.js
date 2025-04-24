@@ -1,86 +1,133 @@
-// Parámetros
-const MAX_NODES = 5;
+// Elementos y estado
 const CANVAS = document.getElementById('networkCanvas');
-const ctx = CANVAS.getContext('2d');
+const tooltip = document.getElementById('tooltip');
+const themeSwitcher = document.getElementById('themeSwitcher');
+const paletteSwitcher = document.getElementById('paletteSwitcher');
 const generateBtn = document.getElementById('generateBtn');
-const calcBtn     = document.getElementById('calcBtn');
-const msgDiv      = document.getElementById('message');
-const nodeCountEl = document.getElementById('nodeCount');
-const totalTimeEl = document.getElementById('totalTime');
+const calcBtn = document.getElementById('calcBtn');
+let nodes = [], edges = [], ctx;
+const MAX_NODES = 5;
 
-let nodes = [];
-let edges = [];
+// Inicialización
+function init() {
+  ctx = CANVAS.getContext('2d');
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+  CANVAS.addEventListener('mousemove', onHover);
+  CANVAS.addEventListener('mouseleave', () => tooltip.style.opacity = 0);
+  themeSwitcher.addEventListener('change', e => document.documentElement.setAttribute('data-theme', e.target.value));
+  paletteSwitcher.addEventListener('change', e => document.documentElement.style.setProperty('--accent', e.target.value));
+  generateBtn.addEventListener('click', generateGraph);
+  calcBtn.addEventListener('click', calculateRoute);
+}
 
-// Genera un entero aleatorio entre min y max (incluidos)
+// Ajuste Hi-DPI y redibujo
+function resizeCanvas() {
+  CANVAS.width = CANVAS.clientWidth * devicePixelRatio;
+  CANVAS.height = CANVAS.clientHeight * devicePixelRatio;
+  ctx.scale(devicePixelRatio, devicePixelRatio);
+  drawGraph();
+}
+
+// Tooltips en nodos/aristas
+function onHover(evt) {
+  const rect = CANVAS.getBoundingClientRect();
+  const mx = evt.clientX - rect.left;
+  const my = evt.clientY - rect.top;
+  let found = false;
+
+  for (let n of nodes) {
+    if (Math.hypot(mx - n.x, my - n.y) < 20) {
+      showTooltip(`Nodo ${n.id}\nDelay: ${n.delay}ms`, evt.clientX, evt.clientY);
+      found = true;
+      break;
+    }
+  }
+  if (!found) {
+    for (let e of edges) {
+      const a = nodes[e.from], b = nodes[e.to];
+      const t = ((mx - a.x)*(b.x - a.x) + (my - a.y)*(b.y - a.y)) /
+                ((b.x - a.x)**2 + (b.y - a.y)**2);
+      if (t > 0 && t < 1) {
+        const px = a.x + t*(b.x - a.x), py = a.y + t*(b.y - a.y);
+        if (Math.hypot(mx - px, my - py) < 6) {
+          showTooltip(`Arista ${e.from}→${e.to}\nPeso: ${e.weight}`, evt.clientX, evt.clientY);
+          found = true;
+          break;
+        }
+      }
+    }
+  }
+  if (!found) tooltip.style.opacity = 0;
+}
+
+function showTooltip(text, x, y) {
+  tooltip.textContent = text;
+  tooltip.style.left = x + 12 + 'px';
+  tooltip.style.top = y + 12 + 'px';
+  tooltip.style.opacity = 1;
+}
+
+// Utilidades y lógica de red
 function randInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// Genera la red: grafo ciclo de n nodos (n entre 2 y MAX_NODES)
 function generateGraph() {
   nodes = [];
   edges = [];
   const n = randInt(2, MAX_NODES);
 
-  // Crear nodos con posición y retardo aleatorio
   for (let i = 0; i < n; i++) {
     nodes.push({
       id: i,
-      delay: randInt(5, 50), // ms
-      x: randInt(50, CANVAS.width - 50),
-      y: randInt(50, CANVAS.height - 50),
+      delay: randInt(5, 50),
+      x: randInt(50, CANVAS.clientWidth - 50),
+      y: randInt(50, CANVAS.clientHeight - 50),
       color: 'steelblue'
     });
   }
 
-  // Crear ciclo: cada nodo se conecta con el siguiente (undirected)
   for (let i = 0; i < n; i++) {
     const j = (i + 1) % n;
-    const w = randInt(10, 100); // peso distancia
+    const w = randInt(10, 100);
     edges.push({ from: i, to: j, weight: w });
     edges.push({ from: j, to: i, weight: w });
   }
 
-  nodeCountEl.textContent = n;
-  totalTimeEl.textContent = '0';
-  msgDiv.textContent = 'Red generada correctamente.';
+  document.getElementById('nodeCount').textContent = n;
+  document.getElementById('totalTime').textContent = 0;
+  document.getElementById('message').textContent = 'Red generada correctamente.';
   drawGraph();
 }
 
-// Dibuja los nodos y aristas en el canvas
 function drawGraph(highlightedPath = []) {
-  ctx.clearRect(0, 0, CANVAS.width, CANVAS.height);
-
-  // Dibujar aristas
+  ctx.clearRect(0, 0, CANVAS.clientWidth, CANVAS.clientHeight);
   ctx.lineWidth = 2;
   ctx.font = '12px sans-serif';
+
   edges.forEach(e => {
-    const from = nodes[e.from];
-    const to   = nodes[e.to];
-    // línea
+    const from = nodes[e.from], to = nodes[e.to];
     ctx.strokeStyle = '#999';
     ctx.beginPath();
     ctx.moveTo(from.x, from.y);
     ctx.lineTo(to.x, to.y);
     ctx.stroke();
-    // peso en el punto medio
     const mx = (from.x + to.x) / 2;
     const my = (from.y + to.y) / 2;
-    ctx.fillStyle = 'black';
+    ctx.fillStyle = 'var(--text)';
     ctx.fillText(e.weight, mx + 4, my - 4);
   });
 
-  // Dibujar nodos
   nodes.forEach(n => {
     ctx.beginPath();
     ctx.fillStyle = highlightedPath.includes(n.id) ? 'limegreen' : n.color;
     ctx.strokeStyle = '#333';
     ctx.lineWidth = 2;
-    ctx.arc(n.x, n.y, 20, 0, 2*Math.PI);
+    ctx.arc(n.x, n.y, 20, 0, 2 * Math.PI);
     ctx.fill();
     ctx.stroke();
-    // id y delay
-    ctx.fillStyle = 'white';
+    ctx.fillStyle = '#fff';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillText(`N${n.id}`, n.x, n.y - 6);
@@ -88,7 +135,6 @@ function drawGraph(highlightedPath = []) {
   });
 }
 
-// Implementación de Dijkstra (uso de pesos de aristas)
 function dijkstra(start, end) {
   const dist = Array(nodes.length).fill(Infinity);
   const prev = Array(nodes.length).fill(null);
@@ -96,14 +142,12 @@ function dijkstra(start, end) {
   dist[start] = 0;
 
   for (let i = 0; i < nodes.length; i++) {
-    // buscar no visitado de menor distancia
     let u = -1;
     for (let j = 0; j < nodes.length; j++)
       if (!visited[j] && (u < 0 || dist[j] < dist[u])) u = j;
     if (dist[u] === Infinity) break;
     visited[u] = true;
 
-    // relajar bordes
     edges.filter(e => e.from === u).forEach(e => {
       if (dist[e.to] > dist[u] + e.weight) {
         dist[e.to] = dist[u] + e.weight;
@@ -112,34 +156,27 @@ function dijkstra(start, end) {
     });
   }
 
-  // reconstruir camino
   const path = [];
   for (let u = end; u != null; u = prev[u]) path.unshift(u);
   return { path, distance: dist[end] };
 }
 
-// Calcula la ruta mínima y suma retardo de nodos
 function calculateRoute() {
-  if (nodes.length === 0) {
-    msgDiv.textContent = 'Primero genera la red, por favor.';
+  if (!nodes.length) {
+    document.getElementById('message').textContent = 'Primero genera la red, por favor.';
     return;
   }
-  const start = 0;
-  const end   = nodes.length - 1;
+  const start = 0, end = nodes.length - 1;
   const { path, distance } = dijkstra(start, end);
-  if (path.length === 0) {
-    msgDiv.textContent = `No hay camino de ${start} a ${end}.`;
+  if (!path.length) {
+    document.getElementById('message').textContent = `No hay camino de ${start} a ${end}.`;
     return;
   }
-  // sumar retardos de nodos en el camino
-  const totalDelay = path.reduce((sum, nodeId) => sum + nodes[nodeId].delay, 0);
-  totalTimeEl.textContent = totalDelay;
-  msgDiv.textContent = `Ruta mínima (peso aristas = ${distance}) encontrada.`;
+  const totalDelay = path.reduce((sum, id) => sum + nodes[id].delay, 0);
+  document.getElementById('totalTime').textContent = totalDelay;
+  document.getElementById('message').textContent = `Ruta mínima (peso aristas=${distance}) encontrada.`;
   drawGraph(path);
 }
 
-// Eventos
-generateBtn.addEventListener('click', generateGraph);
-calcBtn.addEventListener('click', calculateRoute);
-
-
+// Arrancar
+init();
