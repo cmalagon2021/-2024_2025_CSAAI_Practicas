@@ -2,10 +2,10 @@
 <html lang="es" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Práctica 5 – Simulación de Red</title>
   <!-- Fuente Orbitron -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <script src="app.js" defer></script>
 </head>
@@ -15,7 +15,7 @@
       <h1>Simulación de Red Aleatoria</h1>
     </header>
 
-    <!-- Leyenda ubicada debajo del título -->
+    <!-- Leyenda debajo del título -->
     <div class="legend">
       <div><span class="dot normal"></span> Nodo</div>
       <div><span class="dot highlight"></span> Ruta mínima</div>
@@ -42,8 +42,11 @@
       <div class="info"><span class="label">Tiempo total:</span> <span id="totalTime">0</span> ms</div>
     </section>
 
-    <canvas id="networkCanvas"></canvas>
-    <div id="tooltip" class="tooltip"></div>
+    <div class="canvas-wrapper">
+      <canvas id="bgCanvas"></canvas>
+      <canvas id="networkCanvas"></canvas>
+      <div id="tooltip" class="tooltip"></div>
+    </div>
   </div>
 </body>
 </html>
